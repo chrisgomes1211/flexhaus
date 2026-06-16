@@ -7,38 +7,33 @@
   <meta name="description" content="We miss you at FlexHaus. Claim your free week back — no strings, no catch. 3 classes. 14 days. Find your rhythm again.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; scroll-behavior: smooth; overflow-x: hidden; }
     body {
       font-family: 'Inter', -apple-system, sans-serif;
-      background: #0f0f1a;
-      color: #fff;
+      background: #0a0a12;
+      color: #f0f0f0;
       line-height: 1.6;
       overflow-x: hidden;
     }
     h1, h2, h3, h4, h5 { font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; }
     .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
 
-    /* ─── SVG ICONS ─── */
     .icon-svg { width: 32px; height: 32px; flex-shrink: 0; }
     .icon-svg.lg { width: 44px; height: 44px; }
     .icon-svg.sm { width: 20px; height: 20px; }
 
-    /* ─── CURSOR GLOW ─── */
     .cursor-glow {
-      position: fixed;
-      width: 500px; height: 500px;
+      position: fixed; width: 600px; height: 600px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,107,53,0.05) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+      background: radial-gradient(circle, rgba(255,107,53,0.06) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
       transform: translate(-50%, -50%);
-      transition: opacity 0.3s;
     }
 
-    /* ─── HERO BANNER ─── */
+    /* ─── HERO ─── */
     .hero {
       min-height: 100vh;
       position: relative;
@@ -46,75 +41,24 @@
       display: flex;
       align-items: center;
     }
-    .hero-banner {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(160deg, #0f0f1a 0%, #1a1a2e 35%, #0d1117 100%);
-    }
-    .hero-banner::before {
-      content: '';
+    .hero-bg-img {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 90% 40% at 30% 90%, rgba(255,107,53,0.1) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 60% at 80% 20%, rgba(255,107,53,0.04) 0%, transparent 60%);
+        linear-gradient(135deg, rgba(10,10,18,0.92) 0%, rgba(10,10,18,0.7) 40%, rgba(10,10,18,0.4) 70%, rgba(10,10,18,0.2) 100%),
+        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center 30%;
     }
-    .hero-shapes {
+    .hero-accent {
       position: absolute;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .hero-shape {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.03;
-    }
-    .hero-shape:nth-child(1) {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, #ff6b35 0%, transparent 70%);
-      top: -200px; right: -100px;
-      animation: pulseShape 6s ease-in-out infinite;
-    }
-    .hero-shape:nth-child(2) {
-      width: 300px; height: 300px;
-      border: 1px solid rgba(255,107,53,0.08);
-      bottom: 10%; left: -5%;
-      animation: pulseShape 8s ease-in-out infinite reverse;
-    }
-    .hero-shape:nth-child(3) {
-      width: 150px; height: 150px;
-      background: rgba(255,107,53,0.02);
-      top: 20%; left: 15%;
-      animation: pulseShape 10s ease-in-out infinite;
-    }
-    @keyframes pulseShape {
-      0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.03; }
-      50% { transform: scale(1.3) translate(30px, -20px); opacity: 0.06; }
-    }
-    .hero-grid-overlay {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
-      background-size: 100px 100px;
-      mask-image: radial-gradient(ellipse 60% 80% at 50% 40%, black 30%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse 60% 80% at 50% 40%, black 30%, transparent 70%);
-    }
-    .hero-strip {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      bottom: 0; left: 0; right: 0;
       height: 6px;
-      background: linear-gradient(90deg, transparent, #ff6b35, #ff8c5a, #ff6b35, transparent);
-      opacity: 0.6;
+      background: linear-gradient(90deg, transparent, #ff4500, #ff6b35, #ff8c00, transparent);
+      opacity: 0.8;
     }
-
     .hero .container {
-      position: relative;
-      z-index: 2;
+      position: relative; z-index: 2;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
@@ -131,120 +75,122 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(255,107,53,0.1);
-      border: 1px solid rgba(255,107,53,0.2);
+      background: rgba(255,69,0,0.15);
+      border: 1px solid rgba(255,69,0,0.25);
       border-radius: 100px;
-      padding: 0.35rem 1rem 0.35rem 0.5rem;
+      padding: 0.4rem 1rem 0.4rem 0.6rem;
       font-size: 0.75rem;
-      color: #ff6b35;
-      font-weight: 600;
+      color: #ff4500;
+      font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       margin-bottom: 1.5rem;
+      backdrop-filter: blur(4px);
     }
     .hero h1 {
-      font-size: clamp(3.5rem, 7vw, 5.5rem);
-      line-height: 0.95;
-      margin-bottom: 0.75rem;
+      font-size: clamp(3.8rem, 8vw, 6rem);
+      line-height: 0.92;
+      margin-bottom: 1rem;
     }
-    .hero h1 .highlight {
-      background: linear-gradient(135deg, #ff6b35, #ff8c5a, #ff6b35);
-      background-size: 200% 200%;
+    .hero h1 .line1 {
+      display: block;
+      color: #ffffff;
+    }
+    .hero h1 .line2 {
+      display: block;
+      background: linear-gradient(135deg, #ff4500, #ff6b35, #ff8c00, #ff4500);
+      background-size: 300% 300%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: shimmer 4s ease-in-out infinite;
+      animation: gradientShift 4s ease-in-out infinite;
+      font-size: 1.15em;
+      letter-spacing: 0.04em;
+      text-shadow: none;
+      filter: drop-shadow(0 4px 20px rgba(255,69,0,0.3));
     }
-    @keyframes shimmer {
+    @keyframes gradientShift {
       0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
     }
+    .hero h1 .line3 {
+      display: block;
+      font-size: 0.45em;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.15em;
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
     .hero p {
       font-size: 1.05rem;
-      opacity: 0.6;
+      color: rgba(255,255,255,0.7);
       max-width: 440px;
       margin-bottom: 2rem;
-      line-height: 1.7;
+      line-height: 1.75;
+      font-weight: 400;
     }
     .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
     .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.9rem 2rem;
-      background: linear-gradient(135deg, #ff6b35, #ff8c5a);
-      color: #0f0f1a;
-      border: none;
-      border-radius: 12px;
-      font-size: 1rem;
-      font-weight: 700;
-      font-family: inherit;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      cursor: pointer;
-      transition: all 0.25s;
-      text-decoration: none;
-      position: relative;
-      overflow: hidden;
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 1rem 2.2rem;
+      background: linear-gradient(135deg, #ff4500, #ff6b35);
+      color: #fff;
+      border: none; border-radius: 14px;
+      font-size: 1rem; font-weight: 800; font-family: inherit;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      cursor: pointer; transition: all 0.25s;
+      text-decoration: none; position: relative; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(255,69,0,0.3);
     }
     .btn-primary::after {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
-      transform: translateX(-100%);
-      transition: transform 0.6s;
+      transform: translateX(-100%); transition: transform 0.6s;
     }
     .btn-primary:hover::after { transform: translateX(100%); }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,107,53,0.3); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 36px rgba(255,69,0,0.4); }
     .btn-primary:active { transform: translateY(0); }
-    .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.9rem 2rem;
-      background: transparent;
-      color: #fff;
-      border: 2px solid rgba(255,255,255,0.12);
-      border-radius: 12px;
-      font-size: 1rem;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      transition: all 0.25s;
-      text-decoration: none;
-    }
-    .btn-outline:hover { border-color: #ff6b35; color: #ff6b35; }
 
-    .hero-stats { display: flex; gap: 2.5rem; margin-top: 2.5rem; }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.85);
+      border: 1.5px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      font-size: 0.9rem; font-weight: 600; font-family: inherit;
+      cursor: pointer; transition: all 0.25s;
+      text-decoration: none; backdrop-filter: blur(4px);
+    }
+    .btn-outline:hover { border-color: #ff4500; color: #ff4500; background: rgba(255,69,0,0.06); }
+
+    .hero-stats { display: flex; gap: 3rem; margin-top: 2.5rem; }
     .hero-stat h4 {
-      font-size: 2rem;
-      background: linear-gradient(135deg, #ff6b35, #ff8c5a);
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, #ff6b35, #ff8c00);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      line-height: 1;
     }
-    .hero-stat p { font-size: 0.75rem; opacity: 0.45; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.1rem; }
+    .hero-stat p { font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.15rem; font-weight: 500; }
 
-    /* ─── FORM CARD ─── */
+    /* ─── FORM ─── */
     .form-card {
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.04);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 24px;
       padding: 2.5rem;
       position: relative;
-      opacity: 0;
-      transform: translateY(30px) scale(0.97);
-      animation: fadeUp 0.8s 0.2s ease-out forwards;
     }
     .form-card::before {
       content: '';
-      position: absolute;
-      inset: -1px;
+      position: absolute; inset: -1px;
       border-radius: 25px;
-      background: linear-gradient(135deg, rgba(255,107,53,0.25), transparent, rgba(255,107,53,0.1));
+      background: linear-gradient(135deg, rgba(255,69,0,0.25), transparent, rgba(255,107,53,0.1));
       z-index: -1;
       mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       mask-composite: exclude;
@@ -252,161 +198,140 @@
       padding: 1px;
     }
     .form-card .card-icon { margin-bottom: 1rem; }
-    .form-card h3 { font-size: 1.6rem; color: #fff; margin-bottom: 0.25rem; }
-    .form-card .sub { font-size: 0.85rem; opacity: 0.45; margin-bottom: 1.5rem; }
+    .form-card h3 { font-size: 1.7rem; color: #fff; margin-bottom: 0.25rem; }
+    .form-card .sub { font-size: 0.85rem; color: rgba(255,255,255,0.45); margin-bottom: 1.5rem; }
     .form-group { margin-bottom: 1rem; }
     .form-group label {
-      display: block; font-size: 0.7rem; font-weight: 600;
-      color: rgba(255,255,255,0.4); margin-bottom: 0.3rem;
-      text-transform: uppercase; letter-spacing: 0.07em;
+      display: block; font-size: 0.7rem; font-weight: 700;
+      color: rgba(255,255,255,0.45); margin-bottom: 0.3rem;
+      text-transform: uppercase; letter-spacing: 0.08em;
     }
     .form-group input {
-      width: 100%; padding: 0.85rem 1rem;
-      background: rgba(255,255,255,0.04);
-      border: 1.5px solid rgba(255,255,255,0.06);
-      border-radius: 12px; font-size: 1rem; font-family: inherit;
-      color: #fff; transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%; padding: 0.9rem 1rem;
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(255,255,255,0.08);
+      border-radius: 12px; font-size: 0.95rem; font-family: inherit;
+      color: #fff; transition: all 0.2s;
     }
     .form-group input::placeholder { color: rgba(255,255,255,0.15); }
-    .form-group input:focus { outline: none; border-color: #ff6b35; box-shadow: 0 0 0 4px rgba(255,107,53,0.08); }
+    .form-group input:focus { outline: none; border-color: #ff4500; box-shadow: 0 0 0 4px rgba(255,69,0,0.1); }
     .btn-form {
-      width: 100%; padding: 0.95rem;
-      background: linear-gradient(135deg, #ff6b35, #ff8c5a);
-      color: #0f0f1a; border: none; border-radius: 12px;
-      font-size: 1.05rem; font-weight: 700; font-family: inherit;
+      width: 100%; padding: 1rem;
+      background: linear-gradient(135deg, #ff4500, #ff6b35);
+      color: #fff; border: none; border-radius: 12px;
+      font-size: 1rem; font-weight: 800; font-family: inherit;
       text-transform: uppercase; letter-spacing: 0.04em;
       cursor: pointer; transition: all 0.25s;
+      box-shadow: 0 4px 20px rgba(255,69,0,0.25);
     }
-    .btn-form:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,107,53,0.3); }
+    .btn-form:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,69,0,0.35); }
     .btn-form:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
-    .form-note { font-size: 0.7rem; opacity: 0.25; text-align: center; margin-top: 1rem; }
+    .form-note { font-size: 0.7rem; color: rgba(255,255,255,0.2); text-align: center; margin-top: 1rem; }
 
     .confirmation { display: none; text-align: center; padding: 1rem 0; }
     .confirmation.show { display: block; }
     .confirmation .icon { margin: 0 auto 1rem; }
     .confirmation h3 { font-size: 1.8rem; }
-    .confirmation p { opacity: 0.5; max-width: 360px; margin: 0 auto 1.5rem; font-size: 0.9rem; }
+    .confirmation p { color: rgba(255,255,255,0.5); max-width: 360px; margin: 0 auto 1.5rem; font-size: 0.9rem; }
     .confirmation .plan-preview {
       background: rgba(255,255,255,0.03); border-radius: 12px;
       padding: 1.25rem; margin: 1rem 0; text-align: left;
     }
-    .confirmation .plan-preview h5 { font-size: 0.75rem; opacity: 0.4; margin-bottom: 0.75rem; letter-spacing: 0.1em; }
+    .confirmation .plan-preview h5 { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-bottom: 0.75rem; letter-spacing: 0.1em; }
     .confirmation .plan-preview .class-row {
       display: flex; align-items: center; gap: 0.75rem;
       padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.03);
-      font-size: 0.85rem;
+      font-size: 0.85rem; color: rgba(255,255,255,0.7);
     }
     .confirmation .plan-preview .class-row:last-child { border: none; }
     .form-wrapper.submitted .form-card-inner { display: none; }
     .form-wrapper.submitted .confirmation { display: block; }
 
-    /* ─── SECTION BASE ─── */
+    /* ─── SECTIONS ─── */
     section { position: relative; z-index: 1; padding: 6rem 0; }
     .section-label {
       display: inline-flex; align-items: center; gap: 0.4rem;
-      font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.14em; color: #ff6b35; margin-bottom: 0.75rem;
+      font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.14em; color: #ff4500; margin-bottom: 0.75rem;
     }
-    .section-title { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin-bottom: 0.75rem; }
-    .section-sub { font-size: 0.95rem; opacity: 0.45; max-width: 560px; line-height: 1.7; }
+    .section-title { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.08; margin-bottom: 0.75rem; color: #fff; }
+    .section-title .accent { color: #ff4500; }
+    .section-sub { font-size: 0.95rem; color: rgba(255,255,255,0.5); max-width: 560px; line-height: 1.75; }
     .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-scale { opacity: 0; transform: scale(0.92); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
     .reveal-scale.visible { opacity: 1; transform: scale(1); }
 
-    /* ─── FLIPBOX SECTION ─── */
-    .flip-section { background: linear-gradient(180deg, #0f0f1a, #141428); }
+    /* ─── FLIPBOX ─── */
+    .flip-section { background: linear-gradient(180deg, #0a0a12, #111122); }
     .flip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
-
     .flip-card {
       perspective: 1200px;
-      height: 360px;
+      height: 370px;
       cursor: default;
     }
     .flip-card-inner {
-      position: relative;
-      width: 100%; height: 100%;
+      position: relative; width: 100%; height: 100%;
       transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
       transform-style: preserve-3d;
     }
     .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
     .flip-card-front, .flip-card-back {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       border-radius: 20px;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1.5rem;
-      text-align: center;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 2rem 1.5rem; text-align: center;
     }
     .flip-card-front {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
     }
     .flip-card-front .icon-wrap {
-      width: 72px; height: 72px;
+      width: 76px; height: 76px;
       border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       margin-bottom: 1.25rem;
-      background: rgba(255,107,53,0.08);
+      background: rgba(255,69,0,0.08);
       transition: transform 0.3s;
     }
     .flip-card:hover .flip-card-front .icon-wrap { transform: scale(1.05); }
-    .flip-card-front h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .flip-card-front p { font-size: 0.8rem; opacity: 0.4; line-height: 1.5; }
+    .flip-card-front h3 { font-size: 1.25rem; color: #fff; margin-bottom: 0.5rem; }
+    .flip-card-front p { font-size: 0.85rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
     .flip-indicator {
-      position: absolute;
-      bottom: 1rem;
-      left: 50%;
+      position: absolute; bottom: 1rem; left: 50%;
       transform: translateX(-50%);
-      font-size: 0.7rem;
-      opacity: 0.2;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      font-size: 0.65rem; color: rgba(255,255,255,0.2);
+      text-transform: uppercase; letter-spacing: 0.12em;
       transition: opacity 0.3s;
     }
     .flip-card:hover .flip-indicator { opacity: 0; }
-
     .flip-card-back {
-      background: linear-gradient(145deg, rgba(255,107,53,0.08), rgba(255,107,53,0.02));
-      border: 1px solid rgba(255,107,53,0.12);
+      background: linear-gradient(145deg, rgba(255,69,0,0.08), rgba(10,10,18,0.95));
+      border: 1px solid rgba(255,69,0,0.15);
       transform: rotateY(180deg);
     }
     .flip-card-back .back-icon {
       width: 48px; height: 48px;
       border-radius: 50%;
-      background: rgba(255,107,53,0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: rgba(255,69,0,0.12);
+      display: flex; align-items: center; justify-content: center;
       margin-bottom: 1rem;
     }
-    .flip-card-back h4 {
-      font-size: 1rem;
-      color: #ff6b35;
-      margin-bottom: 0.75rem;
-    }
-    .flip-card-back p { font-size: 0.85rem; opacity: 0.65; line-height: 1.6; }
+    .flip-card-back h4 { font-size: 1rem; color: #ff4500; margin-bottom: 0.75rem; }
+    .flip-card-back p { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.65; }
     .flip-card-back .stat-badge {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.35rem 1rem;
-      border-radius: 100px;
-      background: rgba(255,107,53,0.1);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #ff6b35;
+      display: inline-block; margin-top: 1rem;
+      padding: 0.35rem 1rem; border-radius: 100px;
+      background: rgba(255,69,0,0.1);
+      font-size: 0.8rem; font-weight: 700; color: #ff4500;
     }
 
     /* ─── QUIZ ─── */
     .quiz-section {
-      background: linear-gradient(180deg, #141428, #0f0f1a);
+      background: linear-gradient(180deg, #111122, #0a0a12);
       border-top: 1px solid rgba(255,255,255,0.03);
       border-bottom: 1px solid rgba(255,255,255,0.03);
     }
@@ -417,79 +342,78 @@
       border-radius: 16px; padding: 1.5rem;
       margin-bottom: 1rem; transition: all 0.3s;
     }
-    .quiz-question.active { border-color: rgba(255,107,53,0.25); background: rgba(255,107,53,0.03); }
+    .quiz-question.active { border-color: rgba(255,69,0,0.25); background: rgba(255,69,0,0.03); }
     .quiz-question h5 {
-      font-size: 0.85rem; opacity: 0.85; margin-bottom: 0.75rem;
+      font-size: 0.85rem; color: rgba(255,255,255,0.85); margin-bottom: 0.75rem;
       text-transform: none; letter-spacing: 0; font-family: 'Inter', sans-serif; font-weight: 600;
     }
     .quiz-options { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .quiz-option {
       padding: 0.5rem 1.2rem; border-radius: 100px;
-      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
       font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
       color: rgba(255,255,255,0.5);
     }
-    .quiz-option:hover { border-color: rgba(255,107,53,0.3); color: #fff; }
-    .quiz-option.selected { background: rgba(255,107,53,0.12); border-color: #ff6b35; color: #ff6b35; }
+    .quiz-option:hover { border-color: rgba(255,69,0,0.3); color: #fff; }
+    .quiz-option.selected { background: rgba(255,69,0,0.12); border-color: #ff4500; color: #ff4500; }
     .quiz-result {
       display: none; text-align: center; padding: 2rem;
-      background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.12);
+      background: rgba(255,69,0,0.05); border: 1px solid rgba(255,69,0,0.1);
       border-radius: 16px; margin-top: 1rem;
     }
     .quiz-result.show { display: block; animation: fadeUp 0.5s ease-out; }
-    .quiz-result h4 { font-size: 1.4rem; color: #ff6b35; margin-bottom: 0.5rem; }
-    .quiz-result p { opacity: 0.5; }
+    .quiz-result h4 { font-size: 1.4rem; color: #ff4500; margin-bottom: 0.5rem; }
+    .quiz-result p { color: rgba(255,255,255,0.5); }
 
     /* ─── SCHEDULE ─── */
-    .schedule-section { background: linear-gradient(180deg, #0f0f1a, #141428); }
+    .schedule-section { background: linear-gradient(180deg, #0a0a12, #111122); }
     .schedule-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 3rem; }
     .schedule-day {
       background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.05);
       border-radius: 16px; padding: 1.5rem;
     }
-    .schedule-day h4 { font-size: 1rem; color: #ff6b35; margin-bottom: 1rem; letter-spacing: 0.06em; }
+    .schedule-day h4 { font-size: 1rem; color: #ff4500; margin-bottom: 1rem; letter-spacing: 0.06em; }
     .schedule-class {
       display: flex; justify-content: space-between; align-items: center;
       padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.03);
       font-size: 0.85rem;
     }
     .schedule-class:last-child { border: none; }
-    .schedule-class .time { font-weight: 600; color: #fff; }
-    .schedule-class .name { opacity: 0.5; }
-    .schedule-class .spots { font-size: 0.75rem; color: #ff6b35; font-weight: 600; }
+    .schedule-class .time { font-weight: 700; color: #fff; }
+    .schedule-class .name { color: rgba(255,255,255,0.5); }
+    .schedule-class .spots { font-size: 0.75rem; color: #ff6b35; font-weight: 700; }
     .schedule-class .spots.low { color: #ff4444; }
 
     /* ─── TESTIMONIAL ─── */
     .testimonial-section {
-      background: #141428; border-top: 1px solid rgba(255,255,255,0.03);
+      background: #111122; border-top: 1px solid rgba(255,255,255,0.03);
       text-align: center; padding: 5rem 0;
     }
     .testimonial-card {
       max-width: 640px; margin: 2rem auto 0;
       padding: 2.5rem; background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.04); border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.05); border-radius: 20px;
     }
     .testimonial-card .quote {
       font-size: 1.2rem; line-height: 1.7;
-      font-style: italic; opacity: 0.8; margin-bottom: 1.5rem;
+      font-style: italic; color: rgba(255,255,255,0.75); margin-bottom: 1.5rem;
     }
-    .testimonial-card .author { font-weight: 600; font-size: 0.9rem; }
-    .testimonial-card .role { font-size: 0.8rem; opacity: 0.35; }
+    .testimonial-card .author { font-weight: 700; font-size: 0.9rem; color: #fff; }
+    .testimonial-card .role { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
 
     /* ─── FOOTER ─── */
     .site-footer {
-      background: #0a0a14; padding: 2rem 0;
-      text-align: center; font-size: 0.8rem; opacity: 0.35;
-      border-top: 1px solid rgba(255,255,255,0.03);
+      background: #06060e; padding: 2rem 0;
+      text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.25);
+      border-top: 1px solid rgba(255,255,255,0.02);
     }
-    .site-footer a { color: inherit; text-decoration: none; }
-    .site-footer a:hover { color: #ff6b35; opacity: 1; }
+    .site-footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
+    .site-footer a:hover { color: #ff4500; }
 
     ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #0f0f1a; }
-    ::-webkit-scrollbar-thumb { background: #ff6b35; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #e55a2b; }
+    ::-webkit-scrollbar-track { background: #0a0a12; }
+    ::-webkit-scrollbar-thumb { background: #ff4500; border-radius: 4px; }
 
     @media (max-width: 900px) {
       .hero .container { grid-template-columns: 1fr; gap: 2rem; }
@@ -500,7 +424,6 @@
       .hero-cta-group { justify-content: center; }
       .flip-grid { grid-template-columns: 1fr 1fr; }
       .schedule-grid { grid-template-columns: 1fr 1fr; }
-      .flip-card { height: 320px; }
     }
     @media (max-width: 600px) {
       .flip-grid { grid-template-columns: 1fr; }
@@ -508,7 +431,7 @@
       .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
       .form-card { padding: 1.5rem; }
       section { padding: 4rem 0; }
-      .flip-card { height: 300px; }
+      .flip-card { height: 340px; }
     }
   </style>
 </head>
@@ -518,26 +441,23 @@
 
   <!-- ─── HERO ─── -->
   <section class="hero">
-    <div class="hero-banner">
-      <div class="hero-shapes">
-        <div class="hero-shape"></div>
-        <div class="hero-shape"></div>
-        <div class="hero-shape"></div>
-      </div>
-      <div class="hero-grid-overlay"></div>
-      <div class="hero-strip"></div>
-    </div>
+    <div class="hero-bg-img"></div>
+    <div class="hero-accent"></div>
     <div class="container">
       <div class="hero-text">
         <div class="hero-badge">
-          <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           Member Win-Back
         </div>
-        <h1>We miss<br><span class="highlight">you.</span></h1>
+        <h1>
+          <span class="line1">We Miss</span>
+          <span class="line2">You.</span>
+          <span class="line3">Your Comeback Starts Here</span>
+        </h1>
         <p>Your first class at FlexHaus was just the beginning. Come back for a free week — no strings, no catch. Let's find your rhythm.</p>
         <div class="hero-cta-group">
           <a href="#claim" class="btn-primary">
-            <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#0f0f1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             Claim My Free Week
           </a>
           <a href="#flip" class="btn-outline">See How It Works</a>
@@ -562,7 +482,7 @@
         <div class="form-wrapper" id="formWrapper">
           <div class="form-card-inner">
             <div class="card-icon">
-              <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             </div>
             <h3>Claim Your Free Week</h3>
             <p class="sub">3 classes. 14 days. Zero commitment. We'll send everything to your inbox.</p>
@@ -575,25 +495,22 @@
                 <label for="name">First name</label>
                 <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="given-name">
               </div>
-              <button type="submit" class="btn-form" id="submitBtn">
-                <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#0f0f1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                Claim My Free Week
-              </button>
+              <button type="submit" class="btn-form" id="submitBtn">Claim My Free Week</button>
             </form>
-            <p class="form-note">Free for returning members. No payment required. Unsubscribe anytime.</p>
+            <p class="form-note">Free for returning members. No payment required.</p>
           </div>
           <div class="confirmation" id="confirmation">
-            <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 0.75rem"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <h3>You're back in.</h3>
+            <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 0.75rem"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <h3>You're Back In!</h3>
             <p>Check your inbox for your free week pass and personalized Momentum Plan.</p>
             <div class="plan-preview">
               <h5>Your Momentum Plan</h5>
-              <div class="class-row"><svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Day 1: Power Flow — 6:30 AM</span></div>
-              <div class="class-row"><svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Day 4: HIIT Ignite — 12:00 PM</span></div>
-              <div class="class-row"><svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Day 7: Coach Check-In</span></div>
-              <div class="class-row"><svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Day 10: Strength — 5:30 PM</span></div>
+              <div class="class-row"><svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Day 1: Power Flow — 6:30 AM</span></div>
+              <div class="class-row"><svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Day 4: HIIT Ignite — 12:00 PM</span></div>
+              <div class="class-row"><svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Day 7: Coach Check-In</span></div>
+              <div class="class-row"><svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Day 10: Strength — 5:30 PM</span></div>
             </div>
-            <p style="font-size:0.8rem; opacity:0.35"><strong id="joinCount">0</strong> members have come back this month</p>
+            <p style="font-size:0.8rem; color:rgba(255,255,255,0.3)"><strong id="joinCount">0</strong> members have come back this month</p>
           </div>
         </div>
       </div>
@@ -604,25 +521,25 @@
   <section class="flip-section" id="flip">
     <div class="container">
       <span class="section-label reveal">
-        <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
         The FlexHaus Promise
       </span>
-      <h2 class="section-title reveal">Why come back?<br><span style="color:#ff6b35">Flip to find out.</span></h2>
+      <h2 class="section-title reveal">Why Come Back?<br><span class="accent">Flip To Find Out.</span></h2>
       <p class="section-sub reveal">Hover or tap each card to see what's changed. We've been busy making things right.</p>
       <div class="flip-grid">
         <div class="flip-card reveal-scale" style="transition-delay:0s">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <div class="icon-wrap">
-                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               </div>
               <h3>Your Coach. Your Plan.</h3>
               <p>A dedicated coach meets you before your first class back</p>
-              <span class="flip-indicator">Flip →</span>
+              <span class="flip-indicator">Flip &rarr;</span>
             </div>
             <div class="flip-card-back">
               <div class="back-icon">
-                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               </div>
               <h4>Personalised 14-Day Plan</h4>
               <p>They build a plan around your goals, your schedule, your fitness level — not a generic class roster. Day 1 to Day 14, mapped out.</p>
@@ -635,15 +552,15 @@
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <div class="icon-wrap">
-                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               </div>
               <h3>Buddy System</h3>
               <p>Train with a partner at your level</p>
-              <span class="flip-indicator">Flip →</span>
+              <span class="flip-indicator">Flip &rarr;</span>
             </div>
             <div class="flip-card-back">
               <div class="back-icon">
-                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               </div>
               <h4>Community Accountability</h4>
               <p>Opt in and we match you with a training buddy at your level. 57% of members who train with a partner stay 3x longer. Accountability works.</p>
@@ -656,17 +573,17 @@
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <div class="icon-wrap">
-                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               </div>
               <h3>Track Momentum</h3>
               <p>Every class counts toward your streak</p>
-              <span class="flip-indicator">Flip →</span>
+              <span class="flip-indicator">Flip &rarr;</span>
             </div>
             <div class="flip-card-back">
               <div class="back-icon">
-                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               </div>
-              <h4>Streaks & Milestones</h4>
+              <h4>Streaks &amp; Milestones</h4>
               <p>We track your attendance and celebrate every milestone. 3 classes in 14 days = a new habit. We'll nudge, cheer, and keep you going.</p>
               <span class="stat-badge">78% habit formation</span>
             </div>
@@ -677,15 +594,15 @@
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <div class="icon-wrap">
-                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               </div>
               <h3>Flexible Schedule</h3>
               <p>25+ classes a week, any time</p>
-              <span class="flip-indicator">Flip →</span>
+              <span class="flip-indicator">Flip &rarr;</span>
             </div>
             <div class="flip-card-back">
               <div class="back-icon">
-                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               </div>
               <h4>Train on Your Time</h4>
               <p>Early mornings at 6 AM, lunch flows at noon, evening HIIT at 7 PM. 25+ classes weekly across every discipline. Find your new time.</p>
@@ -698,15 +615,15 @@
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <div class="icon-wrap">
-                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/><circle cx="9" cy="7" r="4"/></svg>
+                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
               </div>
               <h3>More Than Workouts</h3>
               <p>Recovery, mobility, community</p>
-              <span class="flip-indicator">Flip →</span>
+              <span class="flip-indicator">Flip &rarr;</span>
             </div>
             <div class="flip-card-back">
               <div class="back-icon">
-                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
               </div>
               <h4>Holistic Fitness Hub</h4>
               <p>Recovery sessions, mobility workshops, nutrition talks, and social events. FlexHaus is a community — not just a gym. 57% stay for connection.</p>
@@ -719,15 +636,15 @@
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <div class="icon-wrap">
-                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
               </div>
               <h3>Holiday Momentum</h3>
               <p>Start now, thrive through December</p>
-              <span class="flip-indicator">Flip →</span>
+              <span class="flip-indicator">Flip &rarr;</span>
             </div>
             <div class="flip-card-back">
               <div class="back-icon">
-                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
               </div>
               <h4>Build the Habit Before the Rush</h4>
               <p>December is the toughest month to stay consistent. Start your Momentum Plan now — build the habit in 14 days before the holiday chaos hits.</p>
@@ -743,10 +660,10 @@
   <section class="quiz-section" id="quiz">
     <div class="container">
       <span class="section-label reveal">
-        <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         60-Second Check
       </span>
-      <h2 class="section-title reveal">What's your FlexHaus type?</h2>
+      <h2 class="section-title reveal">What's Your FlexHaus Type?</h2>
       <p class="section-sub reveal">Answer 3 quick questions and we'll recommend the perfect first class back.</p>
       <div class="quiz-container">
         <div class="quiz-question active" data-q="0">
@@ -777,8 +694,8 @@
           </div>
         </div>
         <div class="quiz-result" id="quizResult">
-          <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 0.75rem"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          <h4>🔥 You're a Momentum Seeker</h4>
+          <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 0.75rem"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <h4>&#x1f525; You're a Momentum Seeker</h4>
           <p>We recommend starting with a Tuesday 6:30 AM Power Flow — our most welcoming class for returners. Coach Alex will meet you at the door.</p>
         </div>
       </div>
@@ -789,10 +706,10 @@
   <section class="schedule-section">
     <div class="container">
       <span class="section-label reveal">
-        <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         This Week
       </span>
-      <h2 class="section-title reveal">Pick your comeback class</h2>
+      <h2 class="section-title reveal">Pick Your Comeback Class</h2>
       <p class="section-sub reveal">Every class has space for you. First-timers and returners always welcome.</p>
       <div class="schedule-grid">
         <div class="schedule-day reveal">
@@ -824,13 +741,13 @@
   <section class="testimonial-section">
     <div class="container">
       <span class="section-label reveal">
-        <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3"/></svg>
+        <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3"/></svg>
         Real Members. Real Comebacks.
       </span>
       <div class="testimonial-card reveal-scale">
         <div class="quote">"I took one class in June and didn't come back for 4 months. The free week email landed in my inbox and I thought — why not? That was 8 weeks ago. I've been 3x a week since. Sometimes you just need a nudge."</div>
-        <div class="author">— Sarah K.</div>
-        <div class="role">Member since October 2026 · Momentum Plan Graduate</div>
+        <div class="author">&mdash; Sarah K.</div>
+        <div class="role">Member since October 2026 &middot; Momentum Plan Graduate</div>
       </div>
     </div>
   </section>
@@ -933,8 +850,8 @@
 
       window.addEventListener('scroll', () => {
         const scrolled = window.scrollY;
-        document.querySelectorAll('.hero-grid-overlay').forEach(el => {
-          el.style.transform = `translateY(${scrolled * 0.15}px)`;
+        document.querySelectorAll('.hero-bg-img').forEach(el => {
+          el.style.backgroundPositionY = `calc(30% + ${scrolled * 0.1}px)`;
         });
       });
     })();
