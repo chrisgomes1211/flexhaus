@@ -18,48 +18,100 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
-    h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; }
+    h1, h2, h3, h4, h5 { font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; }
     .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ─── SVG ICONS ─── */
+    .icon-svg { width: 32px; height: 32px; flex-shrink: 0; }
+    .icon-svg.lg { width: 44px; height: 44px; }
+    .icon-svg.sm { width: 20px; height: 20px; }
 
     /* ─── CURSOR GLOW ─── */
     .cursor-glow {
       position: fixed;
-      width: 400px; height: 400px;
+      width: 500px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,107,53,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255,107,53,0.05) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
       transform: translate(-50%, -50%);
       transition: opacity 0.3s;
     }
 
-    /* ─── HERO ─── */
+    /* ─── HERO BANNER ─── */
     .hero {
       min-height: 100vh;
-      background: linear-gradient(160deg, #0f0f1a 0%, #1a1a2e 40%, #16213e 100%);
-      display: flex;
-      align-items: center;
       position: relative;
       overflow: hidden;
+      display: flex;
+      align-items: center;
     }
-    .hero::before {
+    .hero-banner {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #0f0f1a 0%, #1a1a2e 35%, #0d1117 100%);
+    }
+    .hero-banner::before {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 100% 50% at 50% 100%, rgba(255,107,53,0.08) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(255,107,53,0.03) 0%, transparent 60%);
+        radial-gradient(ellipse 90% 40% at 30% 90%, rgba(255,107,53,0.1) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 80% 20%, rgba(255,107,53,0.04) 0%, transparent 60%);
     }
-    .hero-grid {
+    .hero-shapes {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .hero-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.03;
+    }
+    .hero-shape:nth-child(1) {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, #ff6b35 0%, transparent 70%);
+      top: -200px; right: -100px;
+      animation: pulseShape 6s ease-in-out infinite;
+    }
+    .hero-shape:nth-child(2) {
+      width: 300px; height: 300px;
+      border: 1px solid rgba(255,107,53,0.08);
+      bottom: 10%; left: -5%;
+      animation: pulseShape 8s ease-in-out infinite reverse;
+    }
+    .hero-shape:nth-child(3) {
+      width: 150px; height: 150px;
+      background: rgba(255,107,53,0.02);
+      top: 20%; left: 15%;
+      animation: pulseShape 10s ease-in-out infinite;
+    }
+    @keyframes pulseShape {
+      0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.03; }
+      50% { transform: scale(1.3) translate(30px, -20px); opacity: 0.06; }
+    }
+    .hero-grid-overlay {
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-      background-size: 80px 80px;
-      mask-image: radial-gradient(ellipse 60% 80% at 50% 50%, black 30%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse 60% 80% at 50% 50%, black 30%, transparent 70%);
+        linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+      background-size: 100px 100px;
+      mask-image: radial-gradient(ellipse 60% 80% at 50% 40%, black 30%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 60% 80% at 50% 40%, black 30%, transparent 70%);
     }
+    .hero-strip {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, transparent, #ff6b35, #ff8c5a, #ff6b35, transparent);
+      opacity: 0.6;
+    }
+
     .hero .container {
       position: relative;
       z-index: 2;
@@ -82,7 +134,7 @@
       background: rgba(255,107,53,0.1);
       border: 1px solid rgba(255,107,53,0.2);
       border-radius: 100px;
-      padding: 0.35rem 1rem;
+      padding: 0.35rem 1rem 0.35rem 0.5rem;
       font-size: 0.75rem;
       color: #ff6b35;
       font-weight: 600;
@@ -91,32 +143,34 @@
       margin-bottom: 1.5rem;
     }
     .hero h1 {
-      font-size: clamp(3rem, 6vw, 5rem);
-      line-height: 1;
+      font-size: clamp(3.5rem, 7vw, 5.5rem);
+      line-height: 0.95;
       margin-bottom: 0.75rem;
     }
     .hero h1 .highlight {
-      background: linear-gradient(135deg, #ff6b35, #ff8c5a);
+      background: linear-gradient(135deg, #ff6b35, #ff8c5a, #ff6b35);
+      background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
     .hero p {
-      font-size: 1.1rem;
-      opacity: 0.7;
+      font-size: 1.05rem;
+      opacity: 0.6;
       max-width: 440px;
       margin-bottom: 2rem;
       line-height: 1.7;
     }
-    .hero-cta-group {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
+    .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
     .btn-primary {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
       padding: 0.9rem 2rem;
       background: linear-gradient(135deg, #ff6b35, #ff8c5a);
       color: #0f0f1a;
@@ -144,7 +198,6 @@
     .btn-primary:hover::after { transform: translateX(100%); }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,107,53,0.3); }
     .btn-primary:active { transform: translateY(0); }
-
     .btn-outline {
       display: inline-flex;
       align-items: center;
@@ -152,7 +205,7 @@
       padding: 0.9rem 2rem;
       background: transparent;
       color: #fff;
-      border: 2px solid rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.12);
       border-radius: 12px;
       font-size: 1rem;
       font-weight: 600;
@@ -163,11 +216,7 @@
     }
     .btn-outline:hover { border-color: #ff6b35; color: #ff6b35; }
 
-    .hero-stats {
-      display: flex;
-      gap: 2.5rem;
-      margin-top: 2.5rem;
-    }
+    .hero-stats { display: flex; gap: 2.5rem; margin-top: 2.5rem; }
     .hero-stat h4 {
       font-size: 2rem;
       background: linear-gradient(135deg, #ff6b35, #ff8c5a);
@@ -175,12 +224,13 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .hero-stat p { font-size: 0.8rem; opacity: 0.5; text-transform: uppercase; letter-spacing: 0.05em; }
+    .hero-stat p { font-size: 0.75rem; opacity: 0.45; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.1rem; }
 
     /* ─── FORM CARD ─── */
     .form-card {
-      background: rgba(255,255,255,0.04);
-      backdrop-filter: blur(20px);
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 24px;
       padding: 2.5rem;
@@ -194,304 +244,253 @@
       position: absolute;
       inset: -1px;
       border-radius: 25px;
-      background: linear-gradient(135deg, rgba(255,107,53,0.3), transparent, rgba(255,107,53,0.1));
+      background: linear-gradient(135deg, rgba(255,107,53,0.25), transparent, rgba(255,107,53,0.1));
       z-index: -1;
       mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       mask-composite: exclude;
       -webkit-mask-composite: xor;
       padding: 1px;
     }
-    .form-card .emoji-top { font-size: 2.5rem; margin-bottom: 0.75rem; }
-    .form-card h3 { font-size: 1.6rem; color: #fff; margin-bottom: 0.35rem; }
-    .form-card .sub { font-size: 0.9rem; opacity: 0.5; margin-bottom: 1.5rem; }
+    .form-card .card-icon { margin-bottom: 1rem; }
+    .form-card h3 { font-size: 1.6rem; color: #fff; margin-bottom: 0.25rem; }
+    .form-card .sub { font-size: 0.85rem; opacity: 0.45; margin-bottom: 1.5rem; }
     .form-group { margin-bottom: 1rem; }
     .form-group label {
-      display: block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 0.35rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+      display: block; font-size: 0.7rem; font-weight: 600;
+      color: rgba(255,255,255,0.4); margin-bottom: 0.3rem;
+      text-transform: uppercase; letter-spacing: 0.07em;
     }
     .form-group input {
-      width: 100%;
-      padding: 0.85rem 1rem;
+      width: 100%; padding: 0.85rem 1rem;
       background: rgba(255,255,255,0.04);
-      border: 1.5px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      font-size: 1rem;
-      font-family: inherit;
-      color: #fff;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      border: 1.5px solid rgba(255,255,255,0.06);
+      border-radius: 12px; font-size: 1rem; font-family: inherit;
+      color: #fff; transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .form-group input::placeholder { color: rgba(255,255,255,0.2); }
-    .form-group input:focus {
-      outline: none;
-      border-color: #ff6b35;
-      box-shadow: 0 0 0 4px rgba(255,107,53,0.1);
-    }
+    .form-group input::placeholder { color: rgba(255,255,255,0.15); }
+    .form-group input:focus { outline: none; border-color: #ff6b35; box-shadow: 0 0 0 4px rgba(255,107,53,0.08); }
     .btn-form {
-      width: 100%;
-      padding: 0.95rem;
+      width: 100%; padding: 0.95rem;
       background: linear-gradient(135deg, #ff6b35, #ff8c5a);
-      color: #0f0f1a;
-      border: none;
-      border-radius: 12px;
-      font-size: 1.05rem;
-      font-weight: 700;
-      font-family: inherit;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      cursor: pointer;
-      transition: all 0.25s;
+      color: #0f0f1a; border: none; border-radius: 12px;
+      font-size: 1.05rem; font-weight: 700; font-family: inherit;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      cursor: pointer; transition: all 0.25s;
     }
     .btn-form:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,107,53,0.3); }
     .btn-form:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
-    .form-note { font-size: 0.75rem; opacity: 0.3; text-align: center; margin-top: 1rem; }
+    .form-note { font-size: 0.7rem; opacity: 0.25; text-align: center; margin-top: 1rem; }
 
     .confirmation { display: none; text-align: center; padding: 1rem 0; }
     .confirmation.show { display: block; }
-    .confirmation .icon { font-size: 4rem; margin-bottom: 0.75rem; animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
-    @keyframes popIn { 0% { transform: scale(0) rotate(-10deg); } 100% { transform: scale(1) rotate(0); } }
+    .confirmation .icon { margin: 0 auto 1rem; }
     .confirmation h3 { font-size: 1.8rem; }
-    .confirmation p { opacity: 0.6; max-width: 360px; margin: 0 auto 1.5rem; font-size: 0.95rem; }
+    .confirmation p { opacity: 0.5; max-width: 360px; margin: 0 auto 1.5rem; font-size: 0.9rem; }
     .confirmation .plan-preview {
-      background: rgba(255,255,255,0.04);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: 1rem 0;
-      text-align: left;
+      background: rgba(255,255,255,0.03); border-radius: 12px;
+      padding: 1.25rem; margin: 1rem 0; text-align: left;
     }
-    .confirmation .plan-preview h4 { font-size: 0.8rem; opacity: 0.5; margin-bottom: 0.75rem; letter-spacing: 0.08em; }
+    .confirmation .plan-preview h5 { font-size: 0.75rem; opacity: 0.4; margin-bottom: 0.75rem; letter-spacing: 0.1em; }
     .confirmation .plan-preview .class-row {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.03);
       font-size: 0.85rem;
     }
     .confirmation .plan-preview .class-row:last-child { border: none; }
-    .confirmation .plan-preview .class-row .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #ff6b35;
-      flex-shrink: 0;
-    }
-
     .form-wrapper.submitted .form-card-inner { display: none; }
     .form-wrapper.submitted .confirmation { display: block; }
 
-    /* ─── SECTION STYLES ─── */
+    /* ─── SECTION BASE ─── */
     section { position: relative; z-index: 1; padding: 6rem 0; }
     .section-label {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #ff6b35;
-      margin-bottom: 0.75rem;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.14em; color: #ff6b35; margin-bottom: 0.75rem;
     }
-    .section-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.1;
-      margin-bottom: 1rem;
-    }
-    .section-sub {
-      font-size: 1rem;
-      opacity: 0.5;
-      max-width: 560px;
-      line-height: 1.7;
-    }
-
+    .section-title { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin-bottom: 0.75rem; }
+    .section-sub { font-size: 0.95rem; opacity: 0.45; max-width: 560px; line-height: 1.7; }
     .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-scale { opacity: 0; transform: scale(0.92); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
     .reveal-scale.visible { opacity: 1; transform: scale(1); }
 
-    /* ─── WHY SECTION ─── */
-    .why-section { background: linear-gradient(180deg, #0f0f1a, #141428); }
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    .why-card {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.04);
-      border-radius: 20px;
-      padding: 2.5rem 1.5rem;
-      text-align: center;
-      transition: all 0.4s;
+    /* ─── FLIPBOX SECTION ─── */
+    .flip-section { background: linear-gradient(180deg, #0f0f1a, #141428); }
+    .flip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+
+    .flip-card {
+      perspective: 1200px;
+      height: 360px;
       cursor: default;
     }
-    .why-card:hover {
-      background: rgba(255,107,53,0.04);
-      border-color: rgba(255,107,53,0.15);
-      transform: translateY(-6px);
+    .flip-card-inner {
+      position: relative;
+      width: 100%; height: 100%;
+      transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+      transform-style: preserve-3d;
     }
-    .why-card .icon {
-      width: 64px; height: 64px;
-      border-radius: 16px;
+    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .flip-card-front {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .flip-card-front .icon-wrap {
+      width: 72px; height: 72px;
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      margin: 0 auto 1.25rem;
+      margin-bottom: 1.25rem;
       background: rgba(255,107,53,0.08);
       transition: transform 0.3s;
     }
-    .why-card:hover .icon { transform: scale(1.1) rotate(-4deg); }
-    .why-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .why-card p { font-size: 0.85rem; opacity: 0.5; line-height: 1.6; }
+    .flip-card:hover .flip-card-front .icon-wrap { transform: scale(1.05); }
+    .flip-card-front h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .flip-card-front p { font-size: 0.8rem; opacity: 0.4; line-height: 1.5; }
+    .flip-indicator {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      opacity: 0.2;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: opacity 0.3s;
+    }
+    .flip-card:hover .flip-indicator { opacity: 0; }
 
-    /* ─── QUIZ SECTION ─── */
+    .flip-card-back {
+      background: linear-gradient(145deg, rgba(255,107,53,0.08), rgba(255,107,53,0.02));
+      border: 1px solid rgba(255,107,53,0.12);
+      transform: rotateY(180deg);
+    }
+    .flip-card-back .back-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(255,107,53,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .flip-card-back h4 {
+      font-size: 1rem;
+      color: #ff6b35;
+      margin-bottom: 0.75rem;
+    }
+    .flip-card-back p { font-size: 0.85rem; opacity: 0.65; line-height: 1.6; }
+    .flip-card-back .stat-badge {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      background: rgba(255,107,53,0.1);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #ff6b35;
+    }
+
+    /* ─── QUIZ ─── */
     .quiz-section {
       background: linear-gradient(180deg, #141428, #0f0f1a);
       border-top: 1px solid rgba(255,255,255,0.03);
       border-bottom: 1px solid rgba(255,255,255,0.03);
     }
-    .quiz-container {
-      max-width: 700px;
-      margin: 3rem auto 0;
-    }
+    .quiz-container { max-width: 700px; margin: 3rem auto 0; }
     .quiz-question {
       background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-      transition: all 0.3s;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 16px; padding: 1.5rem;
+      margin-bottom: 1rem; transition: all 0.3s;
     }
-    .quiz-question.active {
-      border-color: rgba(255,107,53,0.3);
-      background: rgba(255,107,53,0.04);
-    }
-    .quiz-question h4 {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      margin-bottom: 0.75rem;
-      text-transform: none;
-      letter-spacing: 0;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
+    .quiz-question.active { border-color: rgba(255,107,53,0.25); background: rgba(255,107,53,0.03); }
+    .quiz-question h5 {
+      font-size: 0.85rem; opacity: 0.85; margin-bottom: 0.75rem;
+      text-transform: none; letter-spacing: 0; font-family: 'Inter', sans-serif; font-weight: 600;
     }
     .quiz-options { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .quiz-option {
-      padding: 0.5rem 1.2rem;
-      border-radius: 100px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      color: rgba(255,255,255,0.6);
+      padding: 0.5rem 1.2rem; border-radius: 100px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+      color: rgba(255,255,255,0.5);
     }
     .quiz-option:hover { border-color: rgba(255,107,53,0.3); color: #fff; }
-    .quiz-option.selected {
-      background: rgba(255,107,53,0.15);
-      border-color: #ff6b35;
-      color: #ff6b35;
-    }
+    .quiz-option.selected { background: rgba(255,107,53,0.12); border-color: #ff6b35; color: #ff6b35; }
     .quiz-result {
-      display: none;
-      text-align: center;
-      padding: 2rem;
-      background: rgba(255,107,53,0.06);
-      border: 1px solid rgba(255,107,53,0.15);
-      border-radius: 16px;
-      margin-top: 1rem;
+      display: none; text-align: center; padding: 2rem;
+      background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.12);
+      border-radius: 16px; margin-top: 1rem;
     }
     .quiz-result.show { display: block; animation: fadeUp 0.5s ease-out; }
     .quiz-result h4 { font-size: 1.4rem; color: #ff6b35; margin-bottom: 0.5rem; }
-    .quiz-result p { opacity: 0.6; }
+    .quiz-result p { opacity: 0.5; }
 
     /* ─── SCHEDULE ─── */
     .schedule-section { background: linear-gradient(180deg, #0f0f1a, #141428); }
-    .schedule-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-top: 3rem;
-    }
+    .schedule-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 3rem; }
     .schedule-day {
       background: rgba(255,255,255,0.02);
       border: 1px solid rgba(255,255,255,0.04);
-      border-radius: 16px;
-      padding: 1.5rem;
+      border-radius: 16px; padding: 1.5rem;
     }
-    .schedule-day h4 {
-      font-size: 1rem;
-      color: #ff6b35;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
+    .schedule-day h4 { font-size: 1rem; color: #ff6b35; margin-bottom: 1rem; letter-spacing: 0.06em; }
     .schedule-class {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.6rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.03);
       font-size: 0.85rem;
     }
     .schedule-class:last-child { border: none; }
     .schedule-class .time { font-weight: 600; color: #fff; }
-    .schedule-class .name { opacity: 0.6; }
-    .schedule-class .spots {
-      font-size: 0.75rem;
-      color: #ff6b35;
-      font-weight: 600;
-    }
+    .schedule-class .name { opacity: 0.5; }
+    .schedule-class .spots { font-size: 0.75rem; color: #ff6b35; font-weight: 600; }
     .schedule-class .spots.low { color: #ff4444; }
 
     /* ─── TESTIMONIAL ─── */
     .testimonial-section {
-      background: #141428;
-      border-top: 1px solid rgba(255,255,255,0.03);
-      text-align: center;
-      padding: 5rem 0;
+      background: #141428; border-top: 1px solid rgba(255,255,255,0.03);
+      text-align: center; padding: 5rem 0;
     }
     .testimonial-card {
-      max-width: 640px;
-      margin: 2rem auto 0;
-      padding: 2.5rem;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.04);
-      border-radius: 20px;
+      max-width: 640px; margin: 2rem auto 0;
+      padding: 2.5rem; background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04); border-radius: 20px;
     }
     .testimonial-card .quote {
-      font-size: 1.3rem;
-      line-height: 1.6;
-      font-style: italic;
-      opacity: 0.85;
-      margin-bottom: 1.5rem;
+      font-size: 1.2rem; line-height: 1.7;
+      font-style: italic; opacity: 0.8; margin-bottom: 1.5rem;
     }
     .testimonial-card .author { font-weight: 600; font-size: 0.9rem; }
-    .testimonial-card .role { font-size: 0.8rem; opacity: 0.4; }
+    .testimonial-card .role { font-size: 0.8rem; opacity: 0.35; }
 
     /* ─── FOOTER ─── */
     .site-footer {
-      background: #0a0a14;
-      padding: 2rem 0;
-      text-align: center;
-      font-size: 0.8rem;
-      opacity: 0.4;
+      background: #0a0a14; padding: 2rem 0;
+      text-align: center; font-size: 0.8rem; opacity: 0.35;
       border-top: 1px solid rgba(255,255,255,0.03);
     }
     .site-footer a { color: inherit; text-decoration: none; }
     .site-footer a:hover { color: #ff6b35; opacity: 1; }
 
-    /* ─── SCROLLBAR ─── */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0f0f1a; }
     ::-webkit-scrollbar-thumb { background: #ff6b35; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #e55a2b; }
 
-    /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       .hero .container { grid-template-columns: 1fr; gap: 2rem; }
       .hero { min-height: 0; padding: 5rem 0 3rem; }
@@ -499,15 +498,17 @@
       .hero p { margin-left: auto; margin-right: auto; }
       .hero-stats { justify-content: center; }
       .hero-cta-group { justify-content: center; }
-      .why-grid { grid-template-columns: 1fr 1fr; }
+      .flip-grid { grid-template-columns: 1fr 1fr; }
       .schedule-grid { grid-template-columns: 1fr 1fr; }
+      .flip-card { height: 320px; }
     }
     @media (max-width: 600px) {
-      .why-grid { grid-template-columns: 1fr; }
+      .flip-grid { grid-template-columns: 1fr; }
       .schedule-grid { grid-template-columns: 1fr; }
       .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
       .form-card { padding: 1.5rem; }
       section { padding: 4rem 0; }
+      .flip-card { height: 300px; }
     }
   </style>
 </head>
@@ -517,15 +518,29 @@
 
   <!-- ─── HERO ─── -->
   <section class="hero">
-    <div class="hero-grid"></div>
+    <div class="hero-banner">
+      <div class="hero-shapes">
+        <div class="hero-shape"></div>
+        <div class="hero-shape"></div>
+        <div class="hero-shape"></div>
+      </div>
+      <div class="hero-grid-overlay"></div>
+      <div class="hero-strip"></div>
+    </div>
     <div class="container">
       <div class="hero-text">
-        <div class="hero-badge">🔥 Member Win-Back</div>
+        <div class="hero-badge">
+          <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Member Win-Back
+        </div>
         <h1>We miss<br><span class="highlight">you.</span></h1>
         <p>Your first class at FlexHaus was just the beginning. Come back for a free week — no strings, no catch. Let's find your rhythm.</p>
         <div class="hero-cta-group">
-          <a href="#claim" class="btn-primary">🔥 Claim My Free Week</a>
-          <a href="#why" class="btn-outline">See How It Works</a>
+          <a href="#claim" class="btn-primary">
+            <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#0f0f1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Claim My Free Week
+          </a>
+          <a href="#flip" class="btn-outline">See How It Works</a>
         </div>
         <div class="hero-stats">
           <div class="hero-stat">
@@ -534,11 +549,11 @@
           </div>
           <div class="hero-stat">
             <h4 id="statClasses">0</h4>
-            <p>Classes This Week</p>
+            <p>Classes Weekly</p>
           </div>
           <div class="hero-stat">
             <h4 id="statWonBack">0</h4>
-            <p>Won Back This Month</p>
+            <p>Won Back</p>
           </div>
         </div>
       </div>
@@ -546,7 +561,9 @@
       <div class="form-card" id="claim">
         <div class="form-wrapper" id="formWrapper">
           <div class="form-card-inner">
-            <div class="emoji-top">💪</div>
+            <div class="card-icon">
+              <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
             <h3>Claim Your Free Week</h3>
             <p class="sub">3 classes. 14 days. Zero commitment. We'll send everything to your inbox.</p>
             <form id="signupForm" novalidate>
@@ -558,64 +575,165 @@
                 <label for="name">First name</label>
                 <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="given-name">
               </div>
-              <button type="submit" class="btn-form" id="submitBtn">🔥 Claim My Free Week</button>
+              <button type="submit" class="btn-form" id="submitBtn">
+                <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#0f0f1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                Claim My Free Week
+              </button>
             </form>
             <p class="form-note">Free for returning members. No payment required. Unsubscribe anytime.</p>
           </div>
           <div class="confirmation" id="confirmation">
-            <div class="icon">🔥</div>
+            <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 0.75rem"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             <h3>You're back in.</h3>
-            <p>Check your inbox for your free week pass and your personalized Momentum Plan.</p>
+            <p>Check your inbox for your free week pass and personalized Momentum Plan.</p>
             <div class="plan-preview">
-              <h4>Your Momentum Plan</h4>
-              <div class="class-row"><span class="dot"></span> <span>Day 1: Power Flow — 6:30 AM</span></div>
-              <div class="class-row"><span class="dot"></span> <span>Day 4: HIIT Ignite — 12:00 PM</span></div>
-              <div class="class-row"><span class="dot"></span> <span>Day 7: Coach Check-In</span></div>
-              <div class="class-row"><span class="dot"></span> <span>Day 10: Strength Foundations — 5:30 PM</span></div>
+              <h5>Your Momentum Plan</h5>
+              <div class="class-row"><svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Day 1: Power Flow — 6:30 AM</span></div>
+              <div class="class-row"><svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Day 4: HIIT Ignite — 12:00 PM</span></div>
+              <div class="class-row"><svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Day 7: Coach Check-In</span></div>
+              <div class="class-row"><svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Day 10: Strength — 5:30 PM</span></div>
             </div>
-            <p style="font-size:0.85rem; opacity:0.4">🎉 <strong id="joinCount">0</strong> members have come back this month</p>
+            <p style="font-size:0.8rem; opacity:0.35"><strong id="joinCount">0</strong> members have come back this month</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─── WHY ─── -->
-  <section class="why-section" id="why">
+  <!-- ─── FLIPBOX ─── -->
+  <section class="flip-section" id="flip">
     <div class="container">
-      <span class="section-label reveal">The FlexHaus Promise</span>
-      <h2 class="section-title reveal">Why come back?</h2>
-      <p class="section-sub reveal">You left for a reason. We get it. Here's what's different now.</p>
-      <div class="why-grid">
-        <div class="why-card reveal" style="transition-delay:0s">
-          <div class="icon">🎯</div>
-          <h3>Your Coach. Your Plan.</h3>
-          <p>A dedicated coach meets you before your first class back. They build a 14-day plan around your goals — not a generic class roster.</p>
+      <span class="section-label reveal">
+        <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        The FlexHaus Promise
+      </span>
+      <h2 class="section-title reveal">Why come back?<br><span style="color:#ff6b35">Flip to find out.</span></h2>
+      <p class="section-sub reveal">Hover or tap each card to see what's changed. We've been busy making things right.</p>
+      <div class="flip-grid">
+        <div class="flip-card reveal-scale" style="transition-delay:0s">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="icon-wrap">
+                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <h3>Your Coach. Your Plan.</h3>
+              <p>A dedicated coach meets you before your first class back</p>
+              <span class="flip-indicator">Flip →</span>
+            </div>
+            <div class="flip-card-back">
+              <div class="back-icon">
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <h4>Personalised 14-Day Plan</h4>
+              <p>They build a plan around your goals, your schedule, your fitness level — not a generic class roster. Day 1 to Day 14, mapped out.</p>
+              <span class="stat-badge">78% retention lift</span>
+            </div>
+          </div>
         </div>
-        <div class="why-card reveal" style="transition-delay:0.1s">
-          <div class="icon">🤝</div>
-          <h3>Buddy System</h3>
-          <p>Opt in and we'll match you with another member at your level. 57% of members who train with a buddy stay 3x longer.</p>
+
+        <div class="flip-card reveal-scale" style="transition-delay:0.1s">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="icon-wrap">
+                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <h3>Buddy System</h3>
+              <p>Train with a partner at your level</p>
+              <span class="flip-indicator">Flip →</span>
+            </div>
+            <div class="flip-card-back">
+              <div class="back-icon">
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <h4>Community Accountability</h4>
+              <p>Opt in and we match you with a training buddy at your level. 57% of members who train with a partner stay 3x longer. Accountability works.</p>
+              <span class="stat-badge">3x longer retention</span>
+            </div>
+          </div>
         </div>
-        <div class="why-card reveal" style="transition-delay:0.2s">
-          <div class="icon">📊</div>
-          <h3>Track Your Momentum</h3>
-          <p>Every class counts. We track your streak and celebrate milestones. 3 classes in 14 days = 78% retention lift.</p>
+
+        <div class="flip-card reveal-scale" style="transition-delay:0.2s">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="icon-wrap">
+                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <h3>Track Momentum</h3>
+              <p>Every class counts toward your streak</p>
+              <span class="flip-indicator">Flip →</span>
+            </div>
+            <div class="flip-card-back">
+              <div class="back-icon">
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <h4>Streaks & Milestones</h4>
+              <p>We track your attendance and celebrate every milestone. 3 classes in 14 days = a new habit. We'll nudge, cheer, and keep you going.</p>
+              <span class="stat-badge">78% habit formation</span>
+            </div>
+          </div>
         </div>
-        <div class="why-card reveal" style="transition-delay:0.3s">
-          <div class="icon">⏰</div>
-          <h3>Flexible Schedule</h3>
-          <p>25+ classes a week. Early mornings, lunch flows, evening HIIT. Find the time that works for you now.</p>
+
+        <div class="flip-card reveal-scale" style="transition-delay:0.3s">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="icon-wrap">
+                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <h3>Flexible Schedule</h3>
+              <p>25+ classes a week, any time</p>
+              <span class="flip-indicator">Flip →</span>
+            </div>
+            <div class="flip-card-back">
+              <div class="back-icon">
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <h4>Train on Your Time</h4>
+              <p>Early mornings at 6 AM, lunch flows at noon, evening HIIT at 7 PM. 25+ classes weekly across every discipline. Find your new time.</p>
+              <span class="stat-badge">12 time slots daily</span>
+            </div>
+          </div>
         </div>
-        <div class="why-card reveal" style="transition-delay:0.4s">
-          <div class="icon">🧘</div>
-          <h3>More Than Workouts</h3>
-          <p>Recovery sessions, mobility workshops, and social events. FlexHaus is a community, not just a gym.</p>
+
+        <div class="flip-card reveal-scale" style="transition-delay:0.4s">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="icon-wrap">
+                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/><circle cx="9" cy="7" r="4"/></svg>
+              </div>
+              <h3>More Than Workouts</h3>
+              <p>Recovery, mobility, community</p>
+              <span class="flip-indicator">Flip →</span>
+            </div>
+            <div class="flip-card-back">
+              <div class="back-icon">
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </div>
+              <h4>Holistic Fitness Hub</h4>
+              <p>Recovery sessions, mobility workshops, nutrition talks, and social events. FlexHaus is a community — not just a gym. 57% stay for connection.</p>
+              <span class="stat-badge">57% stay for community</span>
+            </div>
+          </div>
         </div>
-        <div class="why-card reveal" style="transition-delay:0.5s">
-          <div class="icon">🎄</div>
-          <h3>Holiday Momentum</h3>
-          <p>December is the toughest month to stay consistent. Start now, build the habit before the chaos hits.</p>
+
+        <div class="flip-card reveal-scale" style="transition-delay:0.5s">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="icon-wrap">
+                <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+              <h3>Holiday Momentum</h3>
+              <p>Start now, thrive through December</p>
+              <span class="flip-indicator">Flip →</span>
+            </div>
+            <div class="flip-card-back">
+              <div class="back-icon">
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+              <h4>Build the Habit Before the Rush</h4>
+              <p>December is the toughest month to stay consistent. Start your Momentum Plan now — build the habit in 14 days before the holiday chaos hits.</p>
+              <span class="stat-badge">Start before Dec 1</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -624,12 +742,15 @@
   <!-- ─── QUIZ ─── -->
   <section class="quiz-section" id="quiz">
     <div class="container">
-      <span class="section-label reveal">60-Second Check</span>
+      <span class="section-label reveal">
+        <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        60-Second Check
+      </span>
       <h2 class="section-title reveal">What's your FlexHaus type?</h2>
       <p class="section-sub reveal">Answer 3 quick questions and we'll recommend the perfect first class back.</p>
       <div class="quiz-container">
         <div class="quiz-question active" data-q="0">
-          <h4>1. Why did you stop coming?</h4>
+          <h5>1. Why did you stop coming?</h5>
           <div class="quiz-options">
             <span class="quiz-option" data-value="time">Got too busy</span>
             <span class="quiz-option" data-value="motivation">Lost motivation</span>
@@ -638,7 +759,7 @@
           </div>
         </div>
         <div class="quiz-question" data-q="1">
-          <h4>2. What's your goal coming back?</h4>
+          <h5>2. What's your goal coming back?</h5>
           <div class="quiz-options">
             <span class="quiz-option" data-value="strength">Build strength</span>
             <span class="quiz-option" data-value="cardio">Get fitter</span>
@@ -647,7 +768,7 @@
           </div>
         </div>
         <div class="quiz-question" data-q="2">
-          <h4>3. When can you train?</h4>
+          <h5>3. When can you train?</h5>
           <div class="quiz-options">
             <span class="quiz-option" data-value="morning">Early bird (6-8 AM)</span>
             <span class="quiz-option" data-value="lunch">Lunch break (12-1 PM)</span>
@@ -656,8 +777,9 @@
           </div>
         </div>
         <div class="quiz-result" id="quizResult">
+          <svg class="icon-svg lg" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 0.75rem"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           <h4>🔥 You're a Momentum Seeker</h4>
-          <p>We recommend starting with a Tuesday 6:30 AM Power Flow — it's our most welcoming class for returners. Coach Alex will meet you at the door.</p>
+          <p>We recommend starting with a Tuesday 6:30 AM Power Flow — our most welcoming class for returners. Coach Alex will meet you at the door.</p>
         </div>
       </div>
     </div>
@@ -666,7 +788,10 @@
   <!-- ─── SCHEDULE ─── -->
   <section class="schedule-section">
     <div class="container">
-      <span class="section-label reveal">This Week</span>
+      <span class="section-label reveal">
+        <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        This Week
+      </span>
       <h2 class="section-title reveal">Pick your comeback class</h2>
       <p class="section-sub reveal">Every class has space for you. First-timers and returners always welcome.</p>
       <div class="schedule-grid">
@@ -698,7 +823,10 @@
   <!-- ─── TESTIMONIAL ─── -->
   <section class="testimonial-section">
     <div class="container">
-      <span class="section-label reveal">Real Members. Real Comebacks.</span>
+      <span class="section-label reveal">
+        <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3"/></svg>
+        Real Members. Real Comebacks.
+      </span>
       <div class="testimonial-card reveal-scale">
         <div class="quote">"I took one class in June and didn't come back for 4 months. The free week email landed in my inbox and I thought — why not? That was 8 weeks ago. I've been 3x a week since. Sometimes you just need a nudge."</div>
         <div class="author">— Sarah K.</div>
@@ -724,13 +852,11 @@
       const submitBtn = document.getElementById('submitBtn');
       const cursorGlow = document.getElementById('cursorGlow');
 
-      // ─── CURSOR ───
       document.addEventListener('mousemove', (e) => {
         cursorGlow.style.left = e.clientX + 'px';
         cursorGlow.style.top = e.clientY + 'px';
       });
 
-      // ─── COUNTERS ───
       function animateCounter(el, target, duration) {
         let start = null;
         function step(ts) {
@@ -748,7 +874,6 @@
       animateCounter(statClasses, 28, 1500);
       animateCounter(statWonBack, 47, 2000);
 
-      // ─── SIGNUP STATE ───
       let count = parseInt(localStorage.getItem('flexhaus_winback_count') || '0', 10);
       if (count === 0 && !localStorage.getItem('flexhaus_winback_count')) {
         count = 47;
@@ -763,28 +888,23 @@
         if (!email || !name) return;
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending your pass...';
-
         count += 1;
         localStorage.setItem('flexhaus_winback_count', String(count));
         joinCount.textContent = count;
-
         try {
           localStorage.setItem('flexhaus_email', email);
           localStorage.setItem('flexhaus_name', name);
         } catch(e) {}
-
         setTimeout(() => {
           formWrapper.classList.add('submitted');
           animateCounter(statWonBack, count, 800);
         }, 500);
       });
 
-      // ─── QUIZ ───
       const questions = document.querySelectorAll('.quiz-question');
       const options = document.querySelectorAll('.quiz-option');
       let answered = [false, false, false];
       const result = document.getElementById('quizResult');
-
       options.forEach(opt => {
         opt.addEventListener('click', function() {
           const parent = this.closest('.quiz-question');
@@ -793,12 +913,10 @@
           this.classList.add('selected');
           answered[qIdx] = true;
           parent.classList.remove('active');
-
           if (qIdx < 2) {
             questions[qIdx + 1].classList.add('active');
             questions[qIdx + 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
-
           if (answered.every(Boolean)) {
             result.classList.add('show');
             setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
@@ -806,27 +924,19 @@
         });
       });
 
-      // ─── SCROLL REVEAL ───
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
+          if (entry.isIntersecting) entry.target.classList.add('visible');
         });
       }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal, .reveal-scale, .flip-card, .schedule-day, .testimonial-card, .section-title, .section-sub, .section-label').forEach(el => observer.observe(el));
 
-      document.querySelectorAll('.reveal, .reveal-scale, .why-card, .schedule-day, .testimonial-card, .section-title, .section-sub, .section-label').forEach(el => {
-        observer.observe(el);
-      });
-
-      // ─── PARALLAX ───
       window.addEventListener('scroll', () => {
         const scrolled = window.scrollY;
-        document.querySelectorAll('.hero-grid').forEach(el => {
+        document.querySelectorAll('.hero-grid-overlay').forEach(el => {
           el.style.transform = `translateY(${scrolled * 0.15}px)`;
         });
       });
-
     })();
   </script>
 </body>
