@@ -501,28 +501,92 @@
     /* ─── TESTIMONIAL ─── */
     .testimonial-section {
       background: #111122; border-top: 1px solid rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
       text-align: center; padding: 5rem 0;
     }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin: 2rem auto 0;
+      max-width: 860px;
+    }
     .testimonial-card {
-      max-width: 640px; margin: 2rem auto 0;
-      padding: 2.5rem; background: rgba(255,255,255,0.02);
+      padding: 2rem; background: rgba(255,255,255,0.02);
       border: 1px solid rgba(255,255,255,0.05); border-radius: 20px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
     }
     .testimonial-card .quote {
-      font-size: 1.2rem; line-height: 1.7;
-      font-style: italic; color: rgba(255,255,255,0.75); margin-bottom: 1.5rem;
+      font-size: 1rem; line-height: 1.7;
+      font-style: italic; color: rgba(255,255,255,0.7);
+      flex: 1;
     }
-    .testimonial-card .author { font-weight: 700; font-size: 0.9rem; color: #fff; }
-    .testimonial-card .role { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    .testimonial-card .attribution {
+      display: flex; align-items: center; gap: 1rem;
+      margin-top: 1.25rem; padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .testimonial-card .avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid rgba(255,69,0,0.2);
+    }
+    .testimonial-card .author { font-weight: 700; font-size: 0.85rem; color: #fff; display: block; }
+    .testimonial-card .role { font-size: 0.75rem; color: rgba(255,255,255,0.35); display: block; margin-top: 0.1rem; }
+    .testimonial-card .stars {
+      color: #ff8c00; font-size: 0.8rem; letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+    }
 
     /* ─── FOOTER ─── */
     .site-footer {
-      background: #06060e; padding: 2rem 0;
-      text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.25);
+      background: #06060e; padding: 3rem 0 1.5rem;
       border-top: 1px solid rgba(255,255,255,0.02);
     }
-    .site-footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
-    .site-footer a:hover { color: #ff4500; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    .footer-brand h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem; text-transform: uppercase;
+      letter-spacing: 0.05em; color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .footer-brand p {
+      font-size: 0.8rem; color: rgba(255,255,255,0.3);
+      max-width: 280px; line-height: 1.6;
+    }
+    .footer-col h5 {
+      font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: rgba(255,255,255,0.3);
+      margin-bottom: 0.75rem;
+    }
+    .footer-col a {
+      display: block;
+      font-size: 0.85rem; color: rgba(255,255,255,0.45);
+      text-decoration: none; padding: 0.2rem 0;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: #ff4500; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.03);
+      padding-top: 1.5rem; margin-top: 1rem;
+      text-align: center;
+    }
+    .footer-bottom p {
+      font-size: 0.75rem; color: rgba(255,255,255,0.2);
+    }
+    .footer-bottom .credit {
+      color: rgba(255,255,255,0.35);
+      font-weight: 600;
+    }
+    .footer-bottom .credit:hover { color: #ff4500; }
 
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0a0a12; }
@@ -537,6 +601,8 @@
       .hero-cta-group { justify-content: center; }
       .flip-grid { grid-template-columns: 1fr 1fr; }
       .schedule-grid { grid-template-columns: 1fr 1fr; }
+      .testimonial-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
       .flip-grid { grid-template-columns: 1fr; }
@@ -868,10 +934,39 @@
         <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3"/></svg>
         Real Members. Real Comebacks.
       </span>
-      <div class="testimonial-card reveal-scale">
-        <div class="quote">"I took one class in June and didn't come back for 4 months. The free week email landed in my inbox and I thought — why not? That was 8 weeks ago. I've been 3x a week since. Sometimes you just need a nudge."</div>
-        <div class="author">&mdash; Sarah K.</div>
-        <div class="role">Member since October 2026 &middot; Momentum Plan Graduate</div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card reveal-scale">
+          <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+          <div class="quote">"I took one class in June and didn't come back for 4 months. The free week email landed in my inbox and I thought — why not? That was 8 weeks ago. I've been 3x a week since. Sometimes you just need a nudge."</div>
+          <div class="attribution">
+            <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="" loading="lazy">
+            <div><span class="author">Sarah K.</span><span class="role">Momentum Plan Graduate</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal-scale" style="transition-delay:0.1s">
+          <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+          <div class="quote">"I was sceptical about the 'free week' — thought it'd be a hard sell. But the coach actually listened, built a plan around my dodgy knee, and I've been coming 4x a week for 3 months."</div>
+          <div class="attribution">
+            <img class="avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="" loading="lazy">
+            <div><span class="author">Marcus J.</span><span class="role">Returned Sep 2026</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal-scale" style="transition-delay:0.2s">
+          <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9734;</div>
+          <div class="quote">"The buddy system changed everything. I got matched with someone at my fitness level and suddenly it wasn't about 'working out' — it was about not letting my partner down. Accountability is real."</div>
+          <div class="attribution">
+            <img class="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="" loading="lazy">
+            <div><span class="author">Aisha T.</span><span class="role">Buddy System Member</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal-scale" style="transition-delay:0.3s">
+          <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+          <div class="quote">"I'd cancelled my membership twice. The win-back campaign actually felt personal — not spammy. They remembered my name, my goals, even that I prefer afternoon classes. Back for good this time."</div>
+          <div class="attribution">
+            <img class="avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="" loading="lazy">
+            <div><span class="author">David R.</span><span class="role">Member since Nov 2026</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -879,7 +974,36 @@
   <!-- ─── FOOTER ─── -->
   <footer class="site-footer">
     <div class="container">
-      FlexHaus Boutique Gym &copy; 2026 &middot; <a href="#">Privacy</a> &middot; <a href="#">Contact</a> &middot; <a href="#">Unsubscribe</a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>FlexHaus</h4>
+          <p>Boutique gym built around you. Your comeback starts with a single class. No judgement, no contracts — just momentum.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <a href="#claim">Claim Free Week</a>
+          <a href="#flip">How It Works</a>
+          <a href="#quiz">Find Your Type</a>
+          <a href="#">View Schedule</a>
+        </div>
+        <div class="footer-col">
+          <h5>Support</h5>
+          <a href="#">Contact Us</a>
+          <a href="#">FAQ</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Unsubscribe</a>
+        </div>
+        <div class="footer-col">
+          <h5>Follow</h5>
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">YouTube</a>
+          <a href="#">Blog</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>FlexHaus Boutique Gym &copy; 2026 &middot; <a href="#" class="credit">Website Made by Chris Gomes</a></p>
+      </div>
     </div>
   </footer>
 
