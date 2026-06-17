@@ -25,6 +25,50 @@
     .icon-svg.lg { width: 44px; height: 44px; }
     .icon-svg.sm { width: 20px; height: 20px; }
 
+    /* ── READING PROGRESS BAR ── */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 9999;
+      background: linear-gradient(90deg, #ff4500, #ff6b35, #ff8c00, #ff4500);
+      background-size: 200% 100%;
+      animation: progressGlow 2s linear infinite;
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      transition: transform 0.1s linear;
+      box-shadow: 0 0 12px rgba(255,69,0,0.4);
+    }
+    @keyframes progressGlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    .noise-overlay {
+      position: fixed; inset: 0; z-index: 9998;
+      pointer-events: none; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+    /* ── PARTICLES ── */
+    .particles {
+      position: fixed; inset: 0; z-index: 0; overflow: hidden;
+      pointer-events: none;
+    }
+    .particle {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,107,53,0.4), transparent);
+      opacity: 0.03;
+      animation: particleFloat linear infinite;
+    }
+    @keyframes particleFloat {
+      0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.03; }
+      25% { opacity: 0.06; }
+      50% { transform: translateY(-40vh) translateX(20px) scale(1.2); opacity: 0.04; }
+      75% { opacity: 0.06; }
+      100% { transform: translateY(-80vh) translateX(-10px) scale(0.8); opacity: 0; }
+    }
+
     .cursor-glow {
       position: fixed; width: 600px; height: 600px;
       border-radius: 50%;
@@ -49,6 +93,7 @@
         url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
       background-size: cover;
       background-position: center 30%;
+      transition: transform 0.1s ease-out;
     }
     .hero-accent {
       position: absolute;
@@ -56,6 +101,11 @@
       height: 6px;
       background: linear-gradient(90deg, transparent, #ff4500, #ff6b35, #ff8c00, transparent);
       opacity: 0.8;
+      animation: accentPulse 3s ease-in-out infinite;
+    }
+    @keyframes accentPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
     }
     .hero .container {
       position: relative; z-index: 2;
@@ -65,12 +115,30 @@
       align-items: center;
       width: 100%;
     }
+
+    /* ── CASCADE ENTRANCE ── */
     .hero-text {
       opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 0.8s ease-out forwards;
     }
+    .hero-text.loaded {
+      animation: none;
+      opacity: 1;
+    }
+    .hero-text .cascade-item {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .hero-text.loaded .cascade-item {
+      animation: fadeUp 0.7s ease-out forwards;
+    }
+    .hero-text.loaded .cascade-delay-1 { animation-delay: 0.1s; }
+    .hero-text.loaded .cascade-delay-2 { animation-delay: 0.25s; }
+    .hero-text.loaded .cascade-delay-3 { animation-delay: 0.4s; }
+    .hero-text.loaded .cascade-delay-4 { animation-delay: 0.55s; }
+    .hero-text.loaded .cascade-delay-5 { animation-delay: 0.7s; }
+
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -96,23 +164,37 @@
       display: block;
       color: #ffffff;
     }
+
+    /* Letter-by-letter animation for "You." */
     .hero h1 .line2 {
       display: block;
+      font-size: 1.15em;
+      letter-spacing: 0.04em;
+    }
+    .hero h1 .line2 .letter {
+      display: inline-block;
       background: linear-gradient(135deg, #ff4500, #ff6b35, #ff8c00, #ff4500);
       background-size: 300% 300%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: gradientShift 4s ease-in-out infinite;
-      font-size: 1.15em;
-      letter-spacing: 0.04em;
-      text-shadow: none;
       filter: drop-shadow(0 4px 20px rgba(255,69,0,0.3));
+      opacity: 0;
+      transform: translateY(30px) rotate(-8deg);
     }
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+    .hero-text.loaded .line2 .letter {
+      animation: letterPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
+    .hero-text.loaded .line2 .letter:nth-child(1) { animation-delay: 0.35s; }
+    .hero-text.loaded .line2 .letter:nth-child(2) { animation-delay: 0.45s; }
+    .hero-text.loaded .line2 .letter:nth-child(3) { animation-delay: 0.55s; }
+    .hero-text.loaded .line2 .letter:nth-child(4) { animation-delay: 0.65s; }
+
+    @keyframes letterPop {
+      0% { opacity: 0; transform: translateY(30px) rotate(-8deg); }
+      100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+    }
+
     .hero h1 .line3 {
       display: block;
       font-size: 0.45em;
@@ -130,6 +212,19 @@
       font-weight: 400;
     }
     .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary, .btn-outline { position: relative; overflow: hidden; }
+
+    .ripple {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      transform: scale(0);
+      animation: rippleEffect 0.6s ease-out forwards;
+      pointer-events: none;
+    }
+    @keyframes rippleEffect {
+      to { transform: scale(4); opacity: 0; }
+    }
+
     .btn-primary {
       display: inline-flex; align-items: center; gap: 0.6rem;
       padding: 1rem 2.2rem;
@@ -138,19 +233,19 @@
       border: none; border-radius: 14px;
       font-size: 1rem; font-weight: 800; font-family: inherit;
       text-transform: uppercase; letter-spacing: 0.04em;
-      cursor: pointer; transition: all 0.25s;
-      text-decoration: none; position: relative; overflow: hidden;
+      cursor: pointer; transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-decoration: none;
       box-shadow: 0 4px 24px rgba(255,69,0,0.3);
     }
     .btn-primary::after {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+      background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
       transform: translateX(-100%); transition: transform 0.6s;
     }
     .btn-primary:hover::after { transform: translateX(100%); }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 36px rgba(255,69,0,0.4); }
-    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 36px rgba(255,69,0,0.4); }
+    .btn-primary:active { transform: translateY(0) scale(0.98); }
 
     .btn-outline {
       display: inline-flex; align-items: center; gap: 0.5rem;
@@ -160,10 +255,10 @@
       border: 1.5px solid rgba(255,255,255,0.12);
       border-radius: 14px;
       font-size: 0.9rem; font-weight: 600; font-family: inherit;
-      cursor: pointer; transition: all 0.25s;
+      cursor: pointer; transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
       text-decoration: none; backdrop-filter: blur(4px);
     }
-    .btn-outline:hover { border-color: #ff4500; color: #ff4500; background: rgba(255,69,0,0.06); }
+    .btn-outline:hover { border-color: #ff4500; color: #ff4500; background: rgba(255,69,0,0.06); transform: translateY(-2px); }
 
     .hero-stats { display: flex; gap: 3rem; margin-top: 2.5rem; }
     .hero-stat h4 {
@@ -176,7 +271,7 @@
     }
     .hero-stat p { font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.15rem; font-weight: 500; }
 
-    /* ─── FORM ─── */
+    /* ─── FORM CARD ─── */
     .form-card {
       background: rgba(255,255,255,0.04);
       backdrop-filter: blur(24px);
@@ -196,6 +291,11 @@
       mask-composite: exclude;
       -webkit-mask-composite: xor;
       padding: 1px;
+      animation: borderGlow 4s ease-in-out infinite;
+    }
+    @keyframes borderGlow {
+      0%, 100% { background: linear-gradient(135deg, rgba(255,69,0,0.25), transparent, rgba(255,107,53,0.1)); }
+      50% { background: linear-gradient(135deg, rgba(255,107,53,0.4), rgba(255,69,0,0.1), rgba(255,140,0,0.2)); }
     }
     .form-card .card-icon { margin-bottom: 1rem; }
     .form-card h3 { font-size: 1.7rem; color: #fff; margin-bottom: 0.25rem; }
@@ -221,8 +321,9 @@
       color: #fff; border: none; border-radius: 12px;
       font-size: 1rem; font-weight: 800; font-family: inherit;
       text-transform: uppercase; letter-spacing: 0.04em;
-      cursor: pointer; transition: all 0.25s;
+      cursor: pointer; transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
       box-shadow: 0 4px 20px rgba(255,69,0,0.25);
+      position: relative; overflow: hidden;
     }
     .btn-form:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,69,0,0.35); }
     .btn-form:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
@@ -335,14 +436,26 @@
       border-top: 1px solid rgba(255,255,255,0.03);
       border-bottom: 1px solid rgba(255,255,255,0.03);
     }
-    .quiz-container { max-width: 700px; margin: 3rem auto 0; }
+    .quiz-container { max-width: 700px; margin: 3rem auto 0; position: relative; overflow: hidden; }
     .quiz-question {
       background: rgba(255,255,255,0.02);
       border: 1px solid rgba(255,255,255,0.05);
       border-radius: 16px; padding: 1.5rem;
-      margin-bottom: 1rem; transition: all 0.3s;
+      margin-bottom: 1rem; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      opacity: 0; transform: translateX(40px);
+      position: absolute; left: 0; right: 0;
+      pointer-events: none;
     }
-    .quiz-question.active { border-color: rgba(255,69,0,0.25); background: rgba(255,69,0,0.03); }
+    .quiz-question.active {
+      opacity: 1; transform: translateX(0);
+      pointer-events: auto;
+      border-color: rgba(255,69,0,0.25); background: rgba(255,69,0,0.03);
+      position: relative;
+    }
+    .quiz-question.prev {
+      opacity: 0; transform: translateX(-40px);
+      position: absolute;
+    }
     .quiz-question h5 {
       font-size: 0.85rem; color: rgba(255,255,255,0.85); margin-bottom: 0.75rem;
       text-transform: none; letter-spacing: 0; font-family: 'Inter', sans-serif; font-weight: 600;
@@ -437,43 +550,54 @@
 </head>
 <body>
 
+  <div class="progress-bar" id="progressBar"></div>
+  <div class="noise-overlay"></div>
+  <div class="particles" id="particles"></div>
   <div class="cursor-glow" id="cursorGlow"></div>
 
   <!-- ─── HERO ─── -->
   <section class="hero">
-    <div class="hero-bg-img"></div>
+    <div class="hero-bg-img" id="heroBg"></div>
     <div class="hero-accent"></div>
     <div class="container">
-      <div class="hero-text">
-        <div class="hero-badge">
-          <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          Member Win-Back
+      <div class="hero-text" id="heroText">
+        <div class="cascade-item cascade-delay-1">
+          <div class="hero-badge">
+            <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            Member Win-Back
+          </div>
         </div>
         <h1>
-          <span class="line1">We Miss</span>
-          <span class="line2">You.</span>
-          <span class="line3">Your Comeback Starts Here</span>
+          <span class="line1 cascade-item cascade-delay-2">We Miss</span>
+          <span class="line2 cascade-item cascade-delay-3"><span class="letter">Y</span><span class="letter">o</span><span class="letter">u</span><span class="letter">.</span></span>
+          <span class="line3 cascade-item cascade-delay-4">Your Comeback Starts Here</span>
         </h1>
-        <p>Your first class at FlexHaus was just the beginning. Come back for a free week — no strings, no catch. Let's find your rhythm.</p>
-        <div class="hero-cta-group">
-          <a href="#claim" class="btn-primary">
-            <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            Claim My Free Week
-          </a>
-          <a href="#flip" class="btn-outline">See How It Works</a>
+        <div class="cascade-item cascade-delay-4">
+          <p>Your first class at FlexHaus was just the beginning. Come back for a free week — no strings, no catch. Let's find your rhythm.</p>
         </div>
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <h4 id="statMembers">600</h4>
-            <p>Members</p>
+        <div class="cascade-item cascade-delay-5">
+          <div class="hero-cta-group">
+            <a href="#claim" class="btn-primary" data-ripple>
+              <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Claim My Free Week
+            </a>
+            <a href="#flip" class="btn-outline" data-ripple>See How It Works</a>
           </div>
-          <div class="hero-stat">
-            <h4 id="statClasses">0</h4>
-            <p>Classes Weekly</p>
-          </div>
-          <div class="hero-stat">
-            <h4 id="statWonBack">0</h4>
-            <p>Won Back</p>
+        </div>
+        <div class="cascade-item cascade-delay-5">
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <h4 id="statMembers">600</h4>
+              <p>Members</p>
+            </div>
+            <div class="hero-stat">
+              <h4 id="statClasses">0</h4>
+              <p>Classes Weekly</p>
+            </div>
+            <div class="hero-stat">
+              <h4 id="statWonBack">0</h4>
+              <p>Won Back</p>
+            </div>
           </div>
         </div>
       </div>
@@ -495,7 +619,7 @@
                 <label for="name">First name</label>
                 <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="given-name">
               </div>
-              <button type="submit" class="btn-form" id="submitBtn">Claim My Free Week</button>
+              <button type="submit" class="btn-form" id="submitBtn" data-ripple>Claim My Free Week</button>
             </form>
             <p class="form-note">Free for returning members. No payment required.</p>
           </div>
@@ -768,12 +892,69 @@
       const joinCount = document.getElementById('joinCount');
       const submitBtn = document.getElementById('submitBtn');
       const cursorGlow = document.getElementById('cursorGlow');
+      const progressBar = document.getElementById('progressBar');
+      const heroText = document.getElementById('heroText');
+      const heroBg = document.getElementById('heroBg');
 
+      /* ── CASCADE ENTRANCE ── */
+      requestAnimationFrame(() => {
+        heroText.classList.add('loaded');
+      });
+
+      /* ── MOUSE GLOW ── */
       document.addEventListener('mousemove', (e) => {
         cursorGlow.style.left = e.clientX + 'px';
         cursorGlow.style.top = e.clientY + 'px';
       });
 
+      /* ── PROGRESS BAR ── */
+      function updateProgress() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+        progressBar.style.transform = 'scaleX(' + Math.min(progress, 1) + ')';
+      }
+      window.addEventListener('scroll', updateProgress);
+      window.addEventListener('resize', updateProgress);
+      updateProgress();
+
+      /* ── PARTICLES ── */
+      (function initParticles() {
+        const container = document.getElementById('particles');
+        const count = 12;
+        for (let i = 0; i < count; i++) {
+          const p = document.createElement('div');
+          p.className = 'particle';
+          const size = 40 + Math.random() * 120;
+          p.style.width = size + 'px';
+          p.style.height = size + 'px';
+          p.style.left = Math.random() * 100 + '%';
+          p.style.top = (60 + Math.random() * 40) + '%';
+          p.style.animationDuration = (20 + Math.random() * 30) + 's';
+          p.style.animationDelay = (Math.random() * 15) + 's';
+          container.appendChild(p);
+        }
+      })();
+
+      /* ── BUTTON RIPPLE ── */
+      document.querySelectorAll('[data-ripple]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+          const ripple = document.createElement('span');
+          ripple.className = 'ripple';
+          ripple.style.width = size + 'px';
+          ripple.style.height = size + 'px';
+          ripple.style.left = x + 'px';
+          ripple.style.top = y + 'px';
+          this.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 600);
+        });
+      });
+
+      /* ── COUNTERS ── */
       function animateCounter(el, target, duration) {
         let start = null;
         function step(ts) {
@@ -798,6 +979,7 @@
       }
       joinCount.textContent = count;
 
+      /* ── FORM ── */
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         const email = emailInput.value.trim();
@@ -818,9 +1000,11 @@
         }, 500);
       });
 
+      /* ── QUIZ ── */
       const questions = document.querySelectorAll('.quiz-question');
       const options = document.querySelectorAll('.quiz-option');
       let answered = [false, false, false];
+      let currentQ = 0;
       const result = document.getElementById('quizResult');
       options.forEach(opt => {
         opt.addEventListener('click', function() {
@@ -829,18 +1013,23 @@
           parent.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
           this.classList.add('selected');
           answered[qIdx] = true;
-          parent.classList.remove('active');
           if (qIdx < 2) {
-            questions[qIdx + 1].classList.add('active');
-            questions[qIdx + 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            parent.classList.remove('active');
+            parent.classList.add('prev');
+            currentQ = qIdx + 1;
+            questions[currentQ].classList.add('active');
+            setTimeout(() => questions[currentQ].scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
           }
           if (answered.every(Boolean)) {
-            result.classList.add('show');
-            setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+            setTimeout(() => {
+              result.classList.add('show');
+              result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 200);
           }
         });
       });
 
+      /* ── SCROLL REVEAL ── */
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -848,11 +1037,10 @@
       }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
       document.querySelectorAll('.reveal, .reveal-scale, .flip-card, .schedule-day, .testimonial-card, .section-title, .section-sub, .section-label').forEach(el => observer.observe(el));
 
+      /* ── PARALLAX HERO BG ── */
       window.addEventListener('scroll', () => {
         const scrolled = window.scrollY;
-        document.querySelectorAll('.hero-bg-img').forEach(el => {
-          el.style.backgroundPositionY = `calc(30% + ${scrolled * 0.1}px)`;
-        });
+        heroBg.style.transform = 'translateY(' + (scrolled * 0.08) + 'px)';
       });
     })();
   </script>
