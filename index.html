@@ -498,46 +498,105 @@
     .schedule-class .spots { font-size: 0.75rem; color: #ff6b35; font-weight: 700; }
     .schedule-class .spots.low { color: #ff4444; }
 
-    /* ─── TESTIMONIAL ─── */
+    /* ─── TESTIMONIAL CAROUSEL ─── */
     .testimonial-section {
       background: #111122; border-top: 1px solid rgba(255,255,255,0.03);
       border-bottom: 1px solid rgba(255,255,255,0.03);
       text-align: center; padding: 5rem 0;
     }
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      margin: 2rem auto 0;
-      max-width: 860px;
+    .carousel-wrap {
+      position: relative;
+      max-width: 640px;
+      margin: 2.5rem auto 0;
     }
-    .testimonial-card {
-      padding: 2rem; background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.05); border-radius: 20px;
+    .carousel-track {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .carousel-slide {
+      min-width: 100%;
+      padding: 2.5rem 2rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
       text-align: left;
       display: flex;
       flex-direction: column;
     }
-    .testimonial-card .quote {
-      font-size: 1rem; line-height: 1.7;
-      font-style: italic; color: rgba(255,255,255,0.7);
+    .carousel-slide .stars {
+      color: #ff8c00; font-size: 0.9rem; letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+    .carousel-slide .quote {
+      font-size: 1.05rem; line-height: 1.8;
+      font-style: italic; color: rgba(255,255,255,0.75);
       flex: 1;
     }
-    .testimonial-card .attribution {
+    .carousel-slide .attribution {
       display: flex; align-items: center; gap: 1rem;
-      margin-top: 1.25rem; padding-top: 1rem;
+      margin-top: 1.5rem; padding-top: 1rem;
       border-top: 1px solid rgba(255,255,255,0.04);
     }
-    .testimonial-card .avatar {
+    .carousel-slide .avatar {
       width: 48px; height: 48px; border-radius: 50%;
       object-fit: cover; flex-shrink: 0;
       border: 2px solid rgba(255,69,0,0.2);
     }
-    .testimonial-card .author { font-weight: 700; font-size: 0.85rem; color: #fff; display: block; }
-    .testimonial-card .role { font-size: 0.75rem; color: rgba(255,255,255,0.35); display: block; margin-top: 0.1rem; }
-    .testimonial-card .stars {
-      color: #ff8c00; font-size: 0.8rem; letter-spacing: 2px;
-      margin-bottom: 0.75rem;
+    .carousel-slide .author { font-weight: 700; font-size: 0.85rem; color: #fff; display: block; }
+    .carousel-slide .role { font-size: 0.75rem; color: rgba(255,255,255,0.35); display: block; margin-top: 0.1rem; }
+    .carousel-btn {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      z-index: 10;
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(10,10,18,0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.25s;
+      font-size: 1.1rem;
+    }
+    .carousel-btn:hover {
+      border-color: #ff4500;
+      color: #ff4500;
+      background: rgba(255,69,0,0.1);
+    }
+    .carousel-btn.prev { left: -22px; }
+    .carousel-btn.next { right: -22px; }
+    .carousel-dots {
+      display: flex; justify-content: center; gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .carousel-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.12);
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 0;
+    }
+    .carousel-dot.active { background: #ff4500; width: 28px; border-radius: 5px; }
+    .carousel-dot:hover { background: rgba(255,69,0,0.5); }
+    .carousel-progress {
+      height: 2px;
+      background: rgba(255,255,255,0.05);
+      margin-top: 1rem;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .carousel-progress .bar {
+      height: 100%;
+      background: linear-gradient(90deg, #ff4500, #ff6b35);
+      width: 0%;
+      transition: width 0.1s linear;
+      border-radius: 2px;
     }
 
     /* ─── FOOTER ─── */
@@ -601,7 +660,8 @@
       .hero-cta-group { justify-content: center; }
       .flip-grid { grid-template-columns: 1fr 1fr; }
       .schedule-grid { grid-template-columns: 1fr 1fr; }
-      .testimonial-grid { grid-template-columns: 1fr; }
+      .carousel-btn.prev { left: -12px; }
+      .carousel-btn.next { right: -12px; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
@@ -611,6 +671,10 @@
       .form-card { padding: 1.5rem; }
       section { padding: 4rem 0; }
       .flip-card { height: 340px; }
+      .carousel-btn { width: 36px; height: 36px; }
+      .carousel-btn.prev { left: -8px; }
+      .carousel-btn.next { right: -8px; }
+      .carousel-slide { padding: 1.5rem; }
     }
   </style>
 </head>
@@ -927,46 +991,54 @@
     </div>
   </section>
 
-  <!-- ─── TESTIMONIAL ─── -->
+  <!-- ─── TESTIMONIAL CAROUSEL ─── -->
   <section class="testimonial-section">
     <div class="container">
       <span class="section-label reveal">
         <svg class="icon-svg sm" viewBox="0 0 24 24" fill="none" stroke="#ff4500" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3"/></svg>
         Real Members. Real Comebacks.
       </span>
-      <div class="testimonial-grid">
-        <div class="testimonial-card reveal-scale">
-          <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-          <div class="quote">"I took one class in June and didn't come back for 4 months. The free week email landed in my inbox and I thought — why not? That was 8 weeks ago. I've been 3x a week since. Sometimes you just need a nudge."</div>
-          <div class="attribution">
-            <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="" loading="lazy">
-            <div><span class="author">Sarah K.</span><span class="role">Momentum Plan Graduate</span></div>
+      <div class="carousel-wrap reveal-scale">
+        <div class="carousel-track">
+          <div class="carousel-inner" id="carouselInner">
+            <div class="carousel-slide">
+              <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+              <div class="quote">"I took one class in June and didn't come back for 4 months. The free week email landed in my inbox and I thought — why not? That was 8 weeks ago. I've been 3x a week since. Sometimes you just need a nudge."</div>
+              <div class="attribution">
+                <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="" loading="lazy">
+                <div><span class="author">Sarah K.</span><span class="role">Momentum Plan Graduate</span></div>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+              <div class="quote">"I was sceptical about the 'free week' — thought it'd be a hard sell. But the coach actually listened, built a plan around my dodgy knee, and I've been coming 4x a week for 3 months."</div>
+              <div class="attribution">
+                <img class="avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="" loading="lazy">
+                <div><span class="author">Marcus J.</span><span class="role">Returned Sep 2026</span></div>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9734;</div>
+              <div class="quote">"The buddy system changed everything. I got matched with someone at my fitness level and suddenly it wasn't about 'working out' — it was about not letting my partner down. Accountability is real."</div>
+              <div class="attribution">
+                <img class="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="" loading="lazy">
+                <div><span class="author">Aisha T.</span><span class="role">Buddy System Member</span></div>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+              <div class="quote">"I'd cancelled my membership twice. The win-back campaign actually felt personal — not spammy. They remembered my name, my goals, even that I prefer afternoon classes. Back for good this time."</div>
+              <div class="attribution">
+                <img class="avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="" loading="lazy">
+                <div><span class="author">David R.</span><span class="role">Member since Nov 2026</span></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="testimonial-card reveal-scale" style="transition-delay:0.1s">
-          <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-          <div class="quote">"I was sceptical about the 'free week' — thought it'd be a hard sell. But the coach actually listened, built a plan around my dodgy knee, and I've been coming 4x a week for 3 months."</div>
-          <div class="attribution">
-            <img class="avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="" loading="lazy">
-            <div><span class="author">Marcus J.</span><span class="role">Returned Sep 2026</span></div>
-          </div>
-        </div>
-        <div class="testimonial-card reveal-scale" style="transition-delay:0.2s">
-          <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9734;</div>
-          <div class="quote">"The buddy system changed everything. I got matched with someone at my fitness level and suddenly it wasn't about 'working out' — it was about not letting my partner down. Accountability is real."</div>
-          <div class="attribution">
-            <img class="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="" loading="lazy">
-            <div><span class="author">Aisha T.</span><span class="role">Buddy System Member</span></div>
-          </div>
-        </div>
-        <div class="testimonial-card reveal-scale" style="transition-delay:0.3s">
-          <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-          <div class="quote">"I'd cancelled my membership twice. The win-back campaign actually felt personal — not spammy. They remembered my name, my goals, even that I prefer afternoon classes. Back for good this time."</div>
-          <div class="attribution">
-            <img class="avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="" loading="lazy">
-            <div><span class="author">David R.</span><span class="role">Member since Nov 2026</span></div>
-          </div>
-        </div>
+        <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous">&#10094;</button>
+        <button class="carousel-btn next" id="carouselNext" aria-label="Next">&#10095;</button>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <div class="carousel-progress"><div class="bar" id="carouselProgress"></div></div>
       </div>
     </div>
   </section>
@@ -1124,6 +1196,93 @@
         }, 500);
       });
 
+      /* ── CAROUSEL ── */
+      (function() {
+        const inner = document.getElementById('carouselInner');
+        const slides = inner.querySelectorAll('.carousel-slide');
+        const prevBtn = document.getElementById('carouselPrev');
+        const nextBtn = document.getElementById('carouselNext');
+        const dotsContainer = document.getElementById('carouselDots');
+        const progressBar = document.getElementById('carouselProgress');
+        let current = 0;
+        let autoplayTimer = null;
+        let progressTimer = null;
+        let progressWidth = 0;
+        const autoplayDuration = 5000;
+        const tickInterval = 50;
+        let isPaused = false;
+
+        function createDots() {
+          slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+            dot.addEventListener('click', () => goTo(i));
+            dotsContainer.appendChild(dot);
+          });
+        }
+
+        function goTo(index) {
+          current = index;
+          inner.style.transform = 'translateX(-' + (current * 100) + '%)';
+          dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+            d.classList.toggle('active', i === current);
+          });
+          resetProgress();
+        }
+
+        function next() { goTo((current + 1) % slides.length); }
+        function prev() { goTo((current - 1 + slides.length) % slides.length); }
+
+        function startAutoplay() {
+          if (autoplayTimer) clearInterval(autoplayTimer);
+          if (progressTimer) clearInterval(progressTimer);
+          progressWidth = 0;
+          autoplayTimer = setInterval(() => {
+            if (!isPaused) next();
+          }, autoplayDuration);
+          progressTimer = setInterval(() => {
+            if (!isPaused) {
+              progressWidth += tickInterval / autoplayDuration * 100;
+              if (progressWidth >= 100) progressWidth = 0;
+              progressBar.style.width = Math.min(progressWidth, 100) + '%';
+            }
+          }, tickInterval);
+        }
+
+        function resetProgress() {
+          progressWidth = 0;
+          progressBar.style.width = '0%';
+          startAutoplay();
+        }
+
+        prevBtn.addEventListener('click', () => { prev(); });
+        nextBtn.addEventListener('click', () => { next(); });
+
+        const wrap = document.querySelector('.carousel-wrap');
+        wrap.addEventListener('mouseenter', () => { isPaused = true; });
+        wrap.addEventListener('mouseleave', () => { isPaused = false; });
+
+        /* touch support */
+        let startX = 0;
+        let isDragging = false;
+        wrap.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].clientX;
+          isDragging = true;
+        }, { passive: true });
+        wrap.addEventListener('touchend', (e) => {
+          if (!isDragging) return;
+          const diff = startX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 50) {
+            diff > 0 ? next() : prev();
+          }
+          isDragging = false;
+        }, { passive: true });
+
+        createDots();
+        startAutoplay();
+      })();
+
       /* ── QUIZ ── */
       const questions = document.querySelectorAll('.quiz-question');
       const options = document.querySelectorAll('.quiz-option');
@@ -1159,7 +1318,7 @@
           if (entry.isIntersecting) entry.target.classList.add('visible');
         });
       }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-      document.querySelectorAll('.reveal, .reveal-scale, .flip-card, .schedule-day, .testimonial-card, .section-title, .section-sub, .section-label').forEach(el => observer.observe(el));
+      document.querySelectorAll('.reveal, .reveal-scale, .flip-card, .schedule-day, .carousel-wrap, .section-title, .section-sub, .section-label').forEach(el => observer.observe(el));
 
       /* ── PARALLAX HERO BG ── */
       window.addEventListener('scroll', () => {
